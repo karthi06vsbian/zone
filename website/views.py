@@ -3,9 +3,14 @@ from django.contrib import messages
 from .models import Service, Client, LeadershipMember, ContactSubmission
 
 def home_view(request):
-    services = Service.objects.all()[:6]
-    clients = Client.objects.all()[:6]
-    team_members = LeadershipMember.objects.all()[:4]
+    try:
+        services = Service.objects.all()[:6]
+        clients = Client.objects.all()[:6]
+        team_members = LeadershipMember.objects.all()[:4]
+    except Exception:
+        services = []
+        clients = []
+        team_members = []
     context = {
         'services': services,
         'clients': clients,
@@ -15,7 +20,10 @@ def home_view(request):
 
 
 def services_view(request):
-    services = Service.objects.all()
+    try:
+        services = Service.objects.all()
+    except Exception:
+        services = []
     return render(request, 'services/index.html', {'services': services})
 
 
@@ -25,10 +33,14 @@ def service_detail_view(request, pk=None):
     
     try:
         service = Service.objects.get(pk=pk)
-    except (Service.DoesNotExist, ValueError):
-        service = Service.objects.first()
+    except Exception:
+        service = None
 
-    all_services = Service.objects.all()
+    try:
+        all_services = Service.objects.all()
+    except Exception:
+        all_services = []
+
     context = {
         'service': service,
         'all_services': all_services,
@@ -37,13 +49,20 @@ def service_detail_view(request, pk=None):
 
 
 def about_view(request):
-    team_members = LeadershipMember.objects.all()
+    try:
+        team_members = LeadershipMember.objects.all()
+    except Exception:
+        team_members = []
     return render(request, 'about.html', {'team_members': team_members})
 
 
 def clients_view(request):
-    clients = Client.objects.all()
+    try:
+        clients = Client.objects.all()
+    except Exception:
+        clients = []
     return render(request, 'clients.html', {'clients': clients})
+
 
 
 def contact_view(request):

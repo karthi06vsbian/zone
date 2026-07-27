@@ -75,15 +75,26 @@ TEMPLATES = [
 WSGI_APPLICATION = 'zone_config.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if DATABASE_URL:
+    clean_url = DATABASE_URL.split('?')[0]
+    db_config = dj_database_url.parse(clean_url, conn_max_age=600)
+    if 'mysql' in db_config.get('ENGINE', ''):
+        db_config['OPTIONS'] = {
+            'ssl': {'ssl': True}
+        }
+    DATABASES = {
+        'default': db_config
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': '/tmp/db.sqlite3',
+        }
+    }
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:////tmp/db.sqlite3',
-        conn_max_age=600,
-    )
-}
+
 
 
 # Password validation

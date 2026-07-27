@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Details | Zone Creators</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+        <div class="loading-text">Loading...</div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="../">
+               <i class="bi bi-globe logo-icon"></i> Zone Creators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Service/">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../AboutUs/">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Client/">our client</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../ContactUs/">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title" id="serviceTitle">Service Details</h1>
+            <p class="page-subtitle" id="serviceSubtitle">Loading service details...</p>
+        </div>
+    </div>
+    
+    <!-- Service Details -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mb-4">
+                    <div class="service-detail-card">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="service-icon me-4">
+                                <i class="bi" id="serviceIcon"></i>
+                            </div>
+                            <div>
+                                <h3 class="service-title mb-1" id="serviceTitleText">Service Title</h3>
+                                <p class="service-subtitle mb-0" id="serviceSubtitleText">Service Subtitle</p>
+                            </div>
+                        </div>
+                        
+                        <p class="lead mb-4" id="serviceDescription">Loading description...</p>
+                        
+                        <h4 class="service-title mb-3">What We Offer:</h4>
+                        <ul class="list-group list-group-flush mb-4" id="serviceFeatures">
+                            <!-- Features will be loaded by JavaScript -->
+                        </ul>
+                        
+                        <div class="outcome-badge">
+                            <i class="bi bi-award me-2"></i> Outcome: <span id="serviceOutcome">Loading outcome...</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Information -->
+                    <div class="service-detail-card mt-4">
+                        <h4 class="service-title mb-4">Process & Timeline</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="fw-bold mb-3" style="color: var(--metallic-gold);">Our Process</h5>
+                                <div class="process-step mb-3">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="step-number">1</div>
+                                        <h6 class="mb-0 ms-2">Discovery & Analysis</h6>
+                                    </div>
+                                    <p class="small text-muted">Understanding your business goals and current position</p>
+                                </div>
+                                <div class="process-step mb-3">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="step-number">2</div>
+                                        <h6 class="mb-0 ms-2">Strategy Development</h6>
+                                    </div>
+                                    <p class="small text-muted">Creating customized strategies and action plans</p>
+                                </div>
+                                <div class="process-step mb-3">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="step-number">3</div>
+                                        <h6 class="mb-0 ms-2">Execution & Implementation</h6>
+                                    </div>
+                                    <p class="small text-muted">Implementing the strategy with regular updates</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="fw-bold mb-3" style="color: var(--metallic-gold);">Timeline</h5>
+                                <div class="timeline-item mb-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>Initial Setup</span>
+                                        <span class="badge bg-primary">1-2 Weeks</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item mb-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>Strategy Development</span>
+                                        <span class="badge bg-primary">2-3 Weeks</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item mb-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>Implementation</span>
+                                        <span class="badge bg-primary">Ongoing</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>Visible Results</span>
+                                        <span class="badge bg-primary">1-3 Months</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <!-- Other Services Section - FIXED -->
+                    <div class="service-detail-card mb-4">
+                        <h4 class="service-title mb-4">Other Services</h4>
+                        <div class="row" id="otherServices">
+                            <!-- Other services will be loaded by JavaScript -->
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="../Service/" class="btn btn-primary w-100">View All Services</a>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA Card -->
+                    <div class="service-detail-card mb-4">
+                        <h4 class="service-title mb-4">Get This Service</h4>
+                        <p class="mb-3">Ready to transform your business with this service?</p>
+                        <div class="mb-4">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <span class="small">Customized strategy for your business</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <span class="small">Expert team with proven results</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <span class="small">Monthly performance reports</span>
+                            </div>
+                        </div>
+                        <a href="../ContactUs/" class="btn btn-gold w-100 mb-3">Request a Free Consultation</a>
+                        <a href="tel:+15551234567" class="btn btn-outline-primary w-100">
+                            <i class="bi bi-telephone me-2"></i> Call Now
+                        </a>
+                    </div>
+                    
+                    <!-- Related Resources -->
+                    <div class="service-detail-card">
+                        <h4 class="service-title mb-4">Related Resources</h4>
+                        <div class="resource-item mb-3">
+                            <a href="#" class="d-flex align-items-center text-decoration-none">
+                                <div class="resource-icon me-3">
+                                    <i class="bi bi-file-earmark-text"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">Case Study: Success Story</h6>
+                                    <p class="small text-muted mb-0">See how we helped a similar business</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="resource-item mb-3">
+                            <a href="#" class="d-flex align-items-center text-decoration-none">
+                                <div class="resource-icon me-3">
+                                    <i class="bi bi-camera-video"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">Video Overview</h6>
+                                    <p class="small text-muted mb-0">Watch how this service works</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="resource-item">
+                            <a href="#" class="d-flex align-items-center text-decoration-none">
+                                <div class="resource-icon me-3">
+                                    <i class="bi bi-graph-up"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">Performance Metrics</h6>
+                                    <p class="small text-muted mb-0">Expected results and KPIs</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="service-detail-card">
+                        <h3 class="service-title mb-4 text-center">Frequently Asked Questions</h3>
+                        
+                        <div class="accordion" id="serviceFAQ">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                        What is the typical cost for this service?
+                                    </button>
+                                </h2>
+                                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#serviceFAQ">
+                                    <div class="accordion-body">
+                                        Our pricing is customized based on your specific needs, business size, and scope of work. We offer flexible packages starting from $999/month for basic implementation to comprehensive solutions at higher tiers. Book a free consultation for a personalized quote.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                        How long does it take to see results?
+                                    </button>
+                                </h2>
+                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#serviceFAQ">
+                                    <div class="accordion-body">
+                                        Most clients see initial improvements within 30 days, with significant results visible within 3-6 months. The timeline varies based on your industry, competition, and implementation strategy. We provide monthly progress reports to track results.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                        Do you work with businesses outside your local area?
+                                    </button>
+                                </h2>
+                                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#serviceFAQ">
+                                    <div class="accordion-body">
+                                        Yes! We work with clients worldwide. With modern collaboration tools, we effectively serve clients across different time zones and geographical locations. We've successfully delivered projects for clients in North America, Europe, Asia, and Australia.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="py-5" style="background: linear-gradient(135deg, var(--deep-blue) 0%, var(--dark-navy) 100%);">
+        <div class="container text-center">
+            <h2 class="text-white mb-4">Ready to Get Started?</h2>
+            <p class="text-light mb-4">Join hundreds of successful businesses that have transformed with our services.</p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+                <a href="../ContactUs/" class="btn btn-gold btn-lg">Start Your Free Consultation</a>
+                <a href="tel:+15551234567" class="btn btn-outline-light btn-lg">
+                    <i class="bi bi-telephone me-2"></i> Call Now: +91 72008 31314
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h3 class="footer-title">Zone Creators</h3>
+                    <p>We are not a digital marketing agency. We are business incubators.</p>
+                    <p>From idea validation to business growth, we provide complete marketing, branding & business growth solutions.</p>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="../">Home</a></li>
+                        <li class="mb-2"><a href="../Service/">Our Services</a></li>
+                        <li class="mb-2"><a href="../AboutUs/">About Us</a></li>
+                      
+
+                     <li class="mb-2"><a href="../Client/">Our Clients</a></li> 
+                        <li class="mb-2"><a href="../ContactUs/">Contact Us</a></li>
+                        <li class="mb-2"><a href="../Client/">our client</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h3 class="footer-title">Contact Info</h3>
+                    <p><i class="bi bi-envelope me-2"></i> zonecreators1106@gmail.com</p>
+                    <p><i class="bi bi-telephone me-2"></i> +91 72008 31314</p>
+                    <p><i class="bi bi-geo-alt me-2"></i> 30 A, NACHIVALASU,KOOTHAMPATTI (P.T), ARACHALUR, ERODE - 638101</p>
+                    <div class="social-icons mt-3">
+                        <!--a href="#"><i class="bi bi-facebook"></i></a-->
+                         <a href="https://www.instagram.com/zonecreators_client_page?igsh=dzV6b3FibWRvazdl"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                          <!--a href="#"><i class="bi bi-twitter"></i></a-->
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="text-center">
+            <p>&copy; 2025 Zone Creators. All rights reserved.</p>
+            <p>
+                Website created by 
+                <a href="https://www.devopschanakya.space/" target="_blank" class="text-light" style="text-decoration: none;">
+                    <i class="bi bi-code-slash me-1"></i>DevopsChanakya
+                </a>
+            </p>
+        </div>
+        </div>
+    </footer>
+    
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+  
+     <script src="../js/chatbot.js"></script>
+    <script src="../js/animations.js"></script>
+</body>
+</html>

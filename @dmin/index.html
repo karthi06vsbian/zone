@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <link rel="icon" href="logo.jpg" type="image/x-icon">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #f8f9fa;
+            --dark-bg: #34495e;
+            --gold-color: #d4af37;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            background: linear-gradient(180deg, var(--primary-color) 0%, #1a252f 100%);
+            color: white;
+            min-height: 100vh;
+            position: fixed;
+            width: 250px;
+            box-shadow: 3px 0 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 12px 20px;
+            margin: 5px 0;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .sidebar .nav-link i {
+            width: 25px;
+            text-align: center;
+            margin-right: 10px;
+        }
+        
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gold-color);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .stat-card i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        
+        .stat-card h4 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 10px 0;
+            color: var(--primary-color);
+        }
+        
+        .card-primary { border-left-color: #3498db; }
+        .card-primary i { color: #3498db; }
+        
+        .card-success { border-left-color: #2ecc71; }
+        .card-success i { color: #2ecc71; }
+        
+        .card-warning { border-left-color: #f39c12; }
+        .card-warning i { color: #f39c12; }
+        
+        .card-danger { border-left-color: #e74c3c; }
+        .card-danger i { color: #e74c3c; }
+        
+        .table-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: none;
+            overflow: hidden;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table thead {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3498db 100%);
+            color: white;
+        }
+        
+        .data-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+        
+        .data-table tr:hover {
+            background-color: rgba(0,0,0,0.02);
+        }
+        
+        .data-table tbody tr {
+            transition: all 0.3s;
+        }
+        
+        .data-table tbody tr:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: inline-block;
+        }
+        
+        .status-new { 
+            background-color: #d4edda; 
+            color: #155724; 
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-read { 
+            background-color: #cce5ff; 
+            color: #004085; 
+            border: 1px solid #b8daff;
+        }
+        
+        .status-replied { 
+            background-color: #fff3cd; 
+            color: #856404; 
+            border: 1px solid #ffeaa7;
+        }
+        
+        .status-closed { 
+            background-color: #f8d7da; 
+            color: #721c24; 
+            border: 1px solid #f5c6cb;
+        }
+        
+        .btn-action {
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            margin: 2px;
+        }
+        
+        .btn-action:hover {
+            transform: scale(1.05);
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3498db 100%);
+            color: white;
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .modal-header .btn-close {
+            filter: brightness(0) invert(1);
+        }
+        
+        .detail-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            min-width: 120px;
+        }
+        
+        .message-box {
+            background: #f8f9fa;
+            border-left: 4px solid var(--gold-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .pagination {
+            margin: 0;
+            justify-content: center;
+        }
+        
+        .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .page-link {
+            color: var(--primary-color);
+            border: 1px solid #dee2e6;
+            margin: 0 2px;
+            border-radius: 6px;
+        }
+        
+        .page-link:hover {
+            background-color: #e9ecef;
+            color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: static;
+                min-height: auto;
+                margin-bottom: 20px;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .stat-card {
+                margin-bottom: 20px;
+            }
+            
+            .data-table {
+                font-size: 0.85rem;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: 10px;
+            }
+        }
+        
+        .logo-text {
+            background: linear-gradient(45deg, var(--gold-color), #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .search-box {
+            position: relative;
+        }
+        
+        .search-box .form-control {
+            padding-left: 40px;
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen (shown by default) -->
+    <div id="loginScreen" class="d-block">
+        <div class="login-container">
+            <div class="text-center mb-4">
+                <i class="bi bi-shield-lock display-4" style="color: var(--gold-color);"></i>
+                <h2 class="mt-3">Admin Dashboard</h2>
+                <p class="text-muted">Sign in to access the admin panel</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                        <input type="email" class="form-control" id="email" placeholder="admin@example.com" required>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                        <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+                    </div>
+                </div>
+                
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-100 py-2" id="loginBtn">
+                    <span id="loginText">Sign In</span>
+                    <span class="spinner-border spinner-border-sm d-none ms-2" id="loginSpinner"></span>
+                </button>
+            </form>
+            
+            <div class="alert alert-danger alert-dismissible fade d-none mt-3" id="errorAlert" role="alert">
+                <i class="bi bi-exclamation-triangle me-2"></i>
+                <span id="errorMessage"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            
+            <div class="text-center mt-4">
+                <p class="text-muted small">Use your Firebase admin credentials</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Admin Dashboard (hidden by default) -->
+    <div id="dashboard" class="d-none">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3 class="logo-text">
+                    <i class="bi bi-speedometer2 me-2"></i>Admin Panel
+                </h3>
+                <p  style="color: white;">Contact Form Management</p>
+            </div>
+            
+            <div class="px-3 py-4">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" id="navSubmissions">
+                            <i class="bi bi-envelope"></i>Submissions
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="navAnalytics">
+                            <i class="bi bi-bar-chart"></i>Analytics
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://zonecreators.in//AdminDatasssss/index.php" id="navAnalytics">
+                             <i class="icon-upload-alt"></i> URL Generator
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://zonecreators.in/@dmin/clientadminee.html" id="navAnalytics">
+                            <i class="icon-edit"></i> Manage Client Page
+                        </a>
+                    </li>
+                    
+                      <li class="nav-item">
+                        <a class="nav-link" href="https://zonecreators.in/@dmin/admin" id="navAnalytics">
+                             <i class="icon-pushpin"></i> Edit  About Us
+                        </a>
+                    </li>
+
+
+                    <!--li class="nav-item">
+                      <a class="nav-link" href="#" id="navSettings">
+                    <i class="bi bi-gear"></i>Settings
+                       </a>
+                    </li-->
+                         <li class="nav-item mt-4">
+                         <a class="nav-link text-danger" href="#" id="logoutBtn">
+                            <i class="bi bi-box-arrow-right"></i>Logout
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="mt-5 pt-5 border-top border-secondary">
+                    <p style="color: white;">Logged in as:</p>
+                    <p class="small text-white" id="currentUserEmail">admin@example.com</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="mb-1">Contact Form Submissions</h2>
+                    <p class="text-muted mb-0" id="lastUpdated">Last updated: Just now</p>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="search-box">
+                        <i class="bi bi-search"></i>
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="refreshBtn">
+                        <i class="bi bi-arrow-clockwise"></i>
+                    </button>
+                    <button type="button" class="btn btn-success" id="exportBtn">
+                        <i class="bi bi-download"></i> Export
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="row mb-4" id="statsSection">
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-card card-primary">
+                        <i class="bi bi-envelope"></i>
+                        <h4 id="totalSubmissions">0</h4>
+                        <p class="text-muted mb-0">Total Submissions</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-card card-success">
+                        <i class="bi bi-envelope-plus"></i>
+                        <h4 id="newSubmissions">0</h4>
+                        <p class="text-muted mb-0">New Today</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-card card-warning">
+                        <i class="bi bi-envelope-check"></i>
+                        <h4 id="pendingSubmissions">0</h4>
+                        <p class="text-muted mb-0">Pending Review</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-card card-danger">
+                        <i class="bi bi-envelope-x"></i>
+                        <h4 id="unreadSubmissions">0</h4>
+                        <p class="text-muted mb-0">Unread</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Filters -->
+            <div class="card table-card mb-4" id="filtersSection">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Filter Submissions</h5>
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" id="statusFilter">
+                                <option value="all">All Statuses</option>
+                                <option value="new">New</option>
+                                <option value="read">Read</option>
+                                <option value="replied">Replied</option>
+                                <option value="closed">Closed</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Service</label>
+                            <select class="form-select" id="serviceFilter">
+                                <option value="all">All Services</option>
+                                <option value="content-marketing">Content Marketing</option>
+                                <option value="brand-development">Brand Development</option>
+                                <option value="online-marketing">Online Marketing</option>
+                                <option value="social-media">Social Media Management</option>
+                                <option value="linkedin">LinkedIn Marketing</option>
+                                <option value="sem">SEM</option>
+                                <option value="seo">SEO</option>
+                                <option value="web-development">Web Development</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Date From</label>
+                            <input type="date" class="form-control" id="dateFrom">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Date To</label>
+                            <input type="date" class="form-control" id="dateTo">
+                        </div>
+                    </div>
+                    <div class="mt-3 d-flex gap-2">
+                        <button class="btn btn-primary" id="applyFilters">
+                            <i class="bi bi-funnel me-1"></i> Apply Filters
+                        </button>
+                        <button class="btn btn-outline-secondary" id="clearFilters">
+                            <i class="bi bi-x-circle me-1"></i> Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Submissions Table -->
+            <div class="card table-card">
+                <div class="card-body">
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Service</th>
+                                    <th>Budget</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="submissionsTableBody">
+                                <!-- Data will be populated here -->
+                                <tr id="loadingRow">
+                                    <td colspan="7" class="text-center py-5">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <p class="mt-2 text-muted">Loading submissions...</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div class="text-muted small" id="paginationInfo">
+                            Showing 0 of 0 entries
+                        </div>
+                        <nav>
+                            <ul class="pagination" id="pagination">
+                                <!-- Pagination buttons will be added here -->
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Submission Detail Modal -->
+    <div class="modal fade" id="submissionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Submission Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="submissionDetails">
+                    <!-- Details will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-primary" id="markAsRead">Mark as Read</button>
+                        <button type="button" class="btn btn-outline-success" id="replyBtn">Reply</button>
+                        <button type="button" class="btn btn-outline-danger" id="deleteBtn">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Reply Modal -->
+    <div class="modal fade" id="replyModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Reply to Submission</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">To</label>
+                        <input type="email" class="form-control" id="replyTo" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="replySubject" value="Re: Your Contact Form Submission">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-control" id="replyMessage" rows="6" placeholder="Type your reply message here..."></textarea>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="saveTemplate">
+                        <label class="form-check-label" for="saveTemplate">Save as email template</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="sendReply">
+                        <i class="bi bi-send me-1"></i> Send Reply
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Main JavaScript with Firebase v9 -->
+    <script type="module">
+        // Import Firebase v9 modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy, updateDoc, doc, deleteDoc, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+        
+        // Firebase Configuration - REPLACE WITH YOUR CONFIG
+        const firebaseConfig = {
+            apiKey: "AIzaSyCJc2EMs7Jr3uPifvIgZvOj9e6WrmEs6eI",
+            authDomain: "zonecreators-e46b4.firebaseapp.com",
+            projectId: "zonecreators-e46b4",
+            storageBucket: "zonecreators-e46b4.firebasestorage.app",
+            messagingSenderId: "277260253298",
+            appId: "1:277260253298:web:0bea063024726689662aeb",
+
+        };
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        
+        // Application State
+        let currentUser = null;
+        let currentSubmissionId = null;
+        let submissions = [];
+        let filteredSubmissions = [];
+        let currentPage = 1;
+        const itemsPerPage = 10;
+        
+        // DOM Elements
+        const loginScreen = document.getElementById('loginScreen');
+        const dashboard = document.getElementById('dashboard');
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const loginText = document.getElementById('loginText');
+        const loginSpinner = document.getElementById('loginSpinner');
+        const errorAlert = document.getElementById('errorAlert');
+        const errorMessage = document.getElementById('errorMessage');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const currentUserEmail = document.getElementById('currentUserEmail');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        const searchInput = document.getElementById('searchInput');
+        const lastUpdated = document.getElementById('lastUpdated');
+        const submissionsTableBody = document.getElementById('submissionsTableBody');
+        const loadingRow = document.getElementById('loadingRow');
+        const paginationInfo = document.getElementById('paginationInfo');
+        const pagination = document.getElementById('pagination');
+        
+        // Stats Elements
+        const totalSubmissions = document.getElementById('totalSubmissions');
+        const newSubmissions = document.getElementById('newSubmissions');
+        const pendingSubmissions = document.getElementById('pendingSubmissions');
+        const unreadSubmissions = document.getElementById('unreadSubmissions');
+        
+        // Filter Elements
+        const statusFilter = document.getElementById('statusFilter');
+        const serviceFilter = document.getElementById('serviceFilter');
+        const dateFrom = document.getElementById('dateFrom');
+        const dateTo = document.getElementById('dateTo');
+        const applyFilters = document.getElementById('applyFilters');
+        const clearFilters = document.getElementById('clearFilters');
+        
+        // Modal Elements
+        const submissionModal = new bootstrap.Modal(document.getElementById('submissionModal'));
+        const replyModal = new bootstrap.Modal(document.getElementById('replyModal'));
+        const submissionDetails = document.getElementById('submissionDetails');
+        const replyTo = document.getElementById('replyTo');
+        const replySubject = document.getElementById('replySubject');
+        const replyMessage = document.getElementById('replyMessage');
+        const sendReply = document.getElementById('sendReply');
+        const markAsRead = document.getElementById('markAsRead');
+        const deleteBtn = document.getElementById('deleteBtn');
+        const replyBtn = document.getElementById('replyBtn');
+        
+        // Service name mapping
+        const serviceNames = {
+            'content-marketing': 'Content Marketing',
+            'brand-development': 'Brand Development',
+            'online-marketing': 'Online Marketing',
+            'social-media': 'Social Media Management',
+            'linkedin': 'LinkedIn Marketing',
+            'sem': 'SEM (Search Engine Marketing)',
+            'seo': 'SEO (Search Engine Optimization)',
+            'offline-marketing': 'Offline Marketing',
+            'web-development': 'Web Development',
+            'training': 'Marketing Team Training',
+            'video-editing': 'Video Editing',
+            'graphic-design': 'Graphic Design',
+            'logo-creation': 'Logo Creation',
+            'business-development': 'Business Idea & Development',
+            'multiple': 'Multiple Services',
+            'not-sure': 'Not Sure - Need Consultation'
+        };
+        
+        // Budget range mapping
+        const budgetRanges = {
+            'under-5k': 'Under $5,000',
+            '5k-10k': '$5,000 - $10,000',
+            '10k-25k': '$10,000 - $25,000',
+            '25k-50k': '$25,000 - $50,000',
+            '50k-plus': '$50,000+',
+            'not-sure': 'Not Sure / Need Quote'
+        };
+        
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initFirebaseAuth();
+            initEventListeners();
+        });
+        
+        // Initialize Firebase Authentication
+        function initFirebaseAuth() {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    // User is signed in
+                    currentUser = user;
+                    currentUserEmail.textContent = user.email;
+                    showDashboard();
+                    loadSubmissions();
+                } else {
+                    // User is signed out
+                    showLoginScreen();
+                }
+            });
+        }
+        
+        // Initialize event listeners
+        function initEventListeners() {
+            // Login form
+            loginForm.addEventListener('submit', handleLogin);
+            
+            // Logout
+            logoutBtn.addEventListener('click', handleLogout);
+            
+            // Refresh data
+            refreshBtn.addEventListener('click', loadSubmissions);
+            
+            // Export data
+            exportBtn.addEventListener('click', exportData);
+            
+            // Search
+            searchInput.addEventListener('input', handleSearch);
+            
+            // Filters
+            applyFilters.addEventListener('click', applyFiltersHandler);
+            clearFilters.addEventListener('click', clearFiltersHandler);
+            
+            // Modal buttons
+            markAsRead.addEventListener('click', handleMarkAsRead);
+            deleteBtn.addEventListener('click', handleDelete);
+            replyBtn.addEventListener('click', handleReply);
+            sendReply.addEventListener('click', handleSendReply);
+            
+            // Navigation
+            document.getElementById('navSubmissions').addEventListener('click', (e) => {
+                e.preventDefault();
+                showSubmissionsSection();
+            });
+            
+            document.getElementById('navAnalytics').addEventListener('click', (e) => {
+                e.preventDefault();
+                showAnalyticsSection();
+            });
+            
+            document.getElementById('navSettings').addEventListener('click', (e) => {
+                e.preventDefault();
+                showSettingsSection();
+            });
+        }
+        
+        // Show/Hide screens
+        function showLoginScreen() {
+            loginScreen.classList.remove('d-none');
+            loginScreen.classList.add('d-block');
+            dashboard.classList.remove('d-block');
+            dashboard.classList.add('d-none');
+        }
+        
+        function showDashboard() {
+            loginScreen.classList.remove('d-block');
+            loginScreen.classList.add('d-none');
+            dashboard.classList.remove('d-none');
+            dashboard.classList.add('d-block');
+        }
+        
+        // Handle login
+        async function handleLogin(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Show loading state
+            loginBtn.disabled = true;
+            loginText.textContent = 'Signing in...';
+            loginSpinner.classList.remove('d-none');
+            
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                // Success - auth state listener will handle the rest
+            } catch (error) {
+                // Handle errors
+                errorMessage.textContent = error.message;
+                errorAlert.classList.remove('d-none');
+                errorAlert.classList.add('show');
+                
+                // Reset button state
+                loginBtn.disabled = false;
+                loginText.textContent = 'Sign In';
+                loginSpinner.classList.add('d-none');
+            }
+        }
+        
+        // Handle logout
+        async function handleLogout() {
+            try {
+                await signOut(auth);
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+        }
+        
+        // Load submissions from Firebase
+        async function loadSubmissions() {
+            try {
+                showLoadingState(true);
+                
+                const submissionsRef = collection(db, 'contactSubmissions');
+                const q = query(submissionsRef, orderBy('timestamp', 'desc'));
+                const querySnapshot = await getDocs(q);
+                
+                submissions = [];
+                querySnapshot.forEach(doc => {
+                    const data = doc.data();
+                    submissions.push({
+                        id: doc.id,
+                        name: data.name || 'N/A',
+                        email: data.email || 'N/A',
+                        phone: data.phone || 'N/A',
+                        company: data.company || 'N/A',
+                        service: data.service || 'N/A',
+                        budget: data.budget || 'N/A',
+                        message: data.message || 'N/A',
+                        newsletter: data.newsletter || false,
+                        status: data.status || 'new',
+                        timestamp: data.timestamp || new Date().toISOString(),
+                        ip: data.ip || 'Unknown',
+                        userAgent: data.userAgent || 'Unknown'
+                    });
+                });
+                
+                filteredSubmissions = [...submissions];
+                updateStats();
+                renderTable();
+                updateLastUpdated();
+                showLoadingState(false);
+                
+            } catch (error) {
+                console.error('Error loading submissions:', error);
+                showError('Failed to load submissions. Please refresh the page.');
+                showLoadingState(false);
+            }
+        }
+        
+        // Show loading state
+        function showLoadingState(show) {
+            if (show) {
+                loadingRow.classList.remove('d-none');
+            } else {
+                loadingRow.classList.add('d-none');
+            }
+        }
+        
+        // Update statistics
+        function updateStats() {
+            const total = submissions.length;
+            const today = new Date().toISOString().split('T')[0];
+            const newToday = submissions.filter(s => 
+                s.timestamp.split('T')[0] === today
+            ).length;
+            const unread = submissions.filter(s => s.status === 'new').length;
+            const pending = submissions.filter(s => 
+                s.status === 'new' || s.status === 'read'
+            ).length;
+            
+            totalSubmissions.textContent = total;
+            newSubmissions.textContent = newToday;
+            pendingSubmissions.textContent = pending;
+            unreadSubmissions.textContent = unread;
+        }
+        
+        // Update last updated timestamp
+        function updateLastUpdated() {
+            const now = new Date();
+            lastUpdated.textContent = `Last updated: ${now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+        }
+        
+        // Render table with pagination
+        function renderTable() {
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const currentPageData = filteredSubmissions.slice(startIndex, endIndex);
+            
+            submissionsTableBody.innerHTML = '';
+            
+            if (currentPageData.length === 0) {
+                submissionsTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="text-center py-5">
+                            <i class="bi bi-inbox display-4 text-muted"></i>
+                            <p class="mt-3">No submissions found</p>
+                            <p class="text-muted small">Try adjusting your filters or search terms</p>
+                        </td>
+                    </tr>
+                `;
+            } else {
+                currentPageData.forEach(submission => {
+                    const date = new Date(submission.timestamp).toLocaleString();
+                    const statusClass = `status-${submission.status}`;
+                    const serviceName = serviceNames[submission.service] || submission.service;
+                    const budgetRange = budgetRanges[submission.budget] || submission.budget;
+                    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><small>${date}</small></td>
+                        <td><strong>${submission.name}</strong></td>
+                        <td><a href="mailto:${submission.email}">${submission.email}</a></td>
+                        <td><span class="badge bg-secondary">${serviceName}</span></td>
+                        <td><small>${budgetRange}</small></td>
+                        <td><span class="status-badge ${statusClass}">${submission.status.toUpperCase()}</span></td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary view-btn" data-id="${submission.id}" title="View Details">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-success reply-btn" data-id="${submission.id}" title="Reply">
+                                    <i class="bi bi-reply"></i>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    
+                    submissionsTableBody.appendChild(row);
+                });
+            }
+            
+            // Add event listeners to action buttons
+            setTimeout(() => {
+                document.querySelectorAll('.view-btn').forEach(btn => {
+                    btn.addEventListener('click', () => viewSubmission(btn.dataset.id));
+                });
+                
+                document.querySelectorAll('.reply-btn').forEach(btn => {
+                    btn.addEventListener('click', () => openReplyModal(btn.dataset.id));
+                });
+            }, 100);
+            
+            updatePagination();
+        }
+        
+        // Update pagination
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredSubmissions.length / itemsPerPage);
+            const startItem = ((currentPage - 1) * itemsPerPage) + 1;
+            const endItem = Math.min(currentPage * itemsPerPage, filteredSubmissions.length);
+            
+            // Update pagination info
+            paginationInfo.textContent = filteredSubmissions.length > 0 
+                ? `Showing ${startItem} to ${endItem} of ${filteredSubmissions.length} entries`
+                : 'Showing 0 of 0 entries';
+            
+            // Clear existing pagination
+            pagination.innerHTML = '';
+            
+            if (totalPages <= 1) return;
+            
+            // Previous button
+            const prevLi = document.createElement('li');
+            prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+            prevLi.innerHTML = `<a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>`;
+            prevLi.querySelector('.page-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderTable();
+                }
+            });
+            pagination.appendChild(prevLi);
+            
+            // Page numbers
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageLi = document.createElement('li');
+                pageLi.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                pageLi.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                pageLi.querySelector('.page-link').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentPage = i;
+                    renderTable();
+                });
+                pagination.appendChild(pageLi);
+            }
+            
+            // Next button
+            const nextLi = document.createElement('li');
+            nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextLi.innerHTML = `<a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>`;
+            nextLi.querySelector('.page-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderTable();
+                }
+            });
+            pagination.appendChild(nextLi);
+        }
+        
+        // View submission details
+        async function viewSubmission(submissionId) {
+            currentSubmissionId = submissionId;
+            const submission = submissions.find(s => s.id === submissionId);
+            
+            if (!submission) return;
+            
+            // Update status to "read" if it's "new"
+            if (submission.status === 'new') {
+                await updateStatus(submissionId, 'read');
+            }
+            
+            // Format the details
+            const date = new Date(submission.timestamp).toLocaleString();
+            const serviceName = serviceNames[submission.service] || submission.service;
+            const budgetRange = budgetRanges[submission.budget] || submission.budget;
+            
+            submissionDetails.innerHTML = `
+                <div class="detail-item">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Name:</strong> ${submission.name}
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Email:</strong> <a href="mailto:${submission.email}">${submission.email}</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Phone:</strong> ${submission.phone || 'Not provided'}
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Company:</strong> ${submission.company || 'Not provided'}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Service:</strong> <span class="badge bg-primary">${serviceName}</span>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Budget:</strong> ${budgetRange}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Newsletter:</strong> 
+                            <span class="badge ${submission.newsletter ? 'bg-success' : 'bg-secondary'}">
+                                ${submission.newsletter ? 'Subscribed' : 'Not subscribed'}
+                            </span>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Status:</strong> 
+                            <span class="status-badge status-${submission.status}">${submission.status.toUpperCase()}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-item">
+                    <strong>Message:</strong>
+                    <div class="message-box mt-2">${submission.message}</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Submitted:</strong> <small>${date}</small>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>IP Address:</strong> <small>${submission.ip}</small>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            submissionModal.show();
+        }
+        
+        // Update submission status
+        async function updateStatus(submissionId, status) {
+            try {
+                const submissionRef = doc(db, 'contactSubmissions', submissionId);
+                await updateDoc(submissionRef, {
+                    status: status,
+                    updatedAt: new Date().toISOString()
+                });
+                
+                // Update local data
+                const index = submissions.findIndex(s => s.id === submissionId);
+                if (index !== -1) {
+                    submissions[index].status = status;
+                    updateStats();
+                    
+                    // Update filtered submissions if needed
+                    const filteredIndex = filteredSubmissions.findIndex(s => s.id === submissionId);
+                    if (filteredIndex !== -1) {
+                        filteredSubmissions[filteredIndex].status = status;
+                    }
+                    
+                    renderTable();
+                }
+            } catch (error) {
+                console.error('Error updating status:', error);
+            }
+        }
+        
+        // Handle mark as read
+        async function handleMarkAsRead() {
+            if (currentSubmissionId) {
+                await updateStatus(currentSubmissionId, 'read');
+                submissionModal.hide();
+                showSuccess('Submission marked as read.');
+            }
+        }
+        
+        // Handle delete
+        async function handleDelete() {
+            if (!currentSubmissionId) return;
+            
+            if (!confirm('Are you sure you want to delete this submission? This action cannot be undone.')) {
+                return;
+            }
+            
+            try {
+                await deleteDoc(doc(db, 'contactSubmissions', currentSubmissionId));
+                
+                // Remove from local data
+                submissions = submissions.filter(s => s.id !== currentSubmissionId);
+                filteredSubmissions = filteredSubmissions.filter(s => s.id !== currentSubmissionId);
+                
+                // Reset to first page if current page is empty
+                if (filteredSubmissions.length > 0) {
+                    const totalPages = Math.ceil(filteredSubmissions.length / itemsPerPage);
+                    if (currentPage > totalPages) {
+                        currentPage = totalPages;
+                    }
+                } else {
+                    currentPage = 1;
+                }
+                
+                updateStats();
+                renderTable();
+                submissionModal.hide();
+                
+                showSuccess('Submission deleted successfully.');
+            } catch (error) {
+                console.error('Error deleting submission:', error);
+                showError('Failed to delete submission.');
+            }
+        }
+        
+        // Handle reply
+        function handleReply() {
+            if (!currentSubmissionId) return;
+            
+            const submission = submissions.find(s => s.id === currentSubmissionId);
+            if (!submission) return;
+            
+            replyTo.value = submission.email;
+            replyModal.show();
+        }
+        
+        // Open reply modal
+        function openReplyModal(submissionId) {
+            currentSubmissionId = submissionId;
+            const submission = submissions.find(s => s.id === submissionId);
+            
+            if (!submission) return;
+            
+            replyTo.value = submission.email;
+            replySubject.value = `Re: Your inquiry about ${serviceNames[submission.service] || submission.service}`;
+            replyModal.show();
+        }
+        
+        // Handle send reply
+        async function handleSendReply() {
+            const email = replyTo.value;
+            const subject = replySubject.value;
+            const message = replyMessage.value;
+            
+            if (!message.trim()) {
+                showError('Please enter a message.');
+                return;
+            }
+            
+            try {
+                // Update status to replied
+                await updateStatus(currentSubmissionId, 'replied');
+                
+                // Save reply to database (optional)
+                await addDoc(collection(db, 'replies'), {
+                    submissionId: currentSubmissionId,
+                    to: email,
+                    subject: subject,
+                    message: message,
+                    sentAt: new Date().toISOString(),
+                    sentBy: currentUser.email
+                });
+                
+                // In a real app, you would send the email here
+                // For now, we'll just show a success message
+                
+                replyModal.hide();
+                replyMessage.value = '';
+                
+                showSuccess('Reply sent successfully! (Email sending would be implemented in production)');
+                
+            } catch (error) {
+                console.error('Error sending reply:', error);
+                showError('Failed to send reply.');
+            }
+        }
+        
+        // Handle search
+        function handleSearch() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            if (!searchTerm) {
+                filteredSubmissions = [...submissions];
+            } else {
+                filteredSubmissions = submissions.filter(submission => 
+                    submission.name.toLowerCase().includes(searchTerm) ||
+                    submission.email.toLowerCase().includes(searchTerm) ||
+                    submission.company.toLowerCase().includes(searchTerm) ||
+                    submission.message.toLowerCase().includes(searchTerm) ||
+                    (submission.phone && submission.phone.toLowerCase().includes(searchTerm))
+                );
+            }
+            
+            currentPage = 1;
+            renderTable();
+        }
+        
+        // Apply filters
+        function applyFiltersHandler() {
+            let filtered = [...submissions];
+            
+            // Status filter
+            if (statusFilter.value !== 'all') {
+                filtered = filtered.filter(s => s.status === statusFilter.value);
+            }
+            
+            // Service filter
+            if (serviceFilter.value !== 'all') {
+                filtered = filtered.filter(s => s.service === serviceFilter.value);
+            }
+            
+            // Date filter
+            if (dateFrom.value) {
+                const fromDate = new Date(dateFrom.value);
+                filtered = filtered.filter(s => new Date(s.timestamp) >= fromDate);
+            }
+            
+            if (dateTo.value) {
+                const toDate = new Date(dateTo.value);
+                toDate.setHours(23, 59, 59, 999);
+                filtered = filtered.filter(s => new Date(s.timestamp) <= toDate);
+            }
+            
+            filteredSubmissions = filtered;
+            currentPage = 1;
+            renderTable();
+        }
+        
+        // Clear filters
+        function clearFiltersHandler() {
+            statusFilter.value = 'all';
+            serviceFilter.value = 'all';
+            dateFrom.value = '';
+            dateTo.value = '';
+            searchInput.value = '';
+            
+            filteredSubmissions = [...submissions];
+            currentPage = 1;
+            renderTable();
+        }
+        
+        // Export data
+        function exportData() {
+            const dataToExport = filteredSubmissions.length > 0 ? filteredSubmissions : submissions;
+            
+            if (dataToExport.length === 0) {
+                showError('No data to export.');
+                return;
+            }
+            
+            const csv = convertToCSV(dataToExport);
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `contact_submissions_${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showSuccess('Data exported successfully!');
+        }
+        
+        // Convert to CSV
+        function convertToCSV(data) {
+            const headers = ['Date', 'Name', 'Email', 'Phone', 'Company', 'Service', 'Budget', 'Message', 'Status', 'Newsletter'];
+            const rows = data.map(submission => [
+                new Date(submission.timestamp).toLocaleString(),
+                submission.name,
+                submission.email,
+                submission.phone || '',
+                submission.company || '',
+                serviceNames[submission.service] || submission.service,
+                budgetRanges[submission.budget] || submission.budget,
+                submission.message.replace(/"/g, '""'),
+                submission.status,
+                submission.newsletter ? 'Yes' : 'No'
+            ]);
+            
+            // Escape fields with commas
+            const escapedRows = rows.map(row => 
+                row.map(field => `"${field}"`).join(',')
+            );
+            
+            return [headers.join(','), ...escapedRows].join('\n');
+        }
+        
+        // Show sections
+        function showSubmissionsSection() {
+            document.getElementById('statsSection').classList.remove('d-none');
+            document.getElementById('filtersSection').classList.remove('d-none');
+            // Update active nav
+            updateActiveNav('navSubmissions');
+        }
+        
+        function showAnalyticsSection() {
+            document.getElementById('statsSection').classList.add('d-none');
+            document.getElementById('filtersSection').classList.add('d-none');
+            // Update active nav
+            updateActiveNav('navAnalytics');
+        }
+        
+        function showSettingsSection() {
+            document.getElementById('statsSection').classList.add('d-none');
+            document.getElementById('filtersSection').classList.add('d-none');
+            // Update active nav
+            updateActiveNav('navSettings');
+        }
+        
+        function updateActiveNav(activeId) {
+            // Remove active class from all nav items
+            document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to clicked nav item
+            document.getElementById(activeId).classList.add('active');
+        }
+        
+        // Show success message
+        function showSuccess(message) {
+            const alert = document.createElement('div');
+            alert.className = 'alert alert-success alert-dismissible fade show position-fixed';
+            alert.style.cssText = 'top: 20px; right: 20px; z-index: 1050; min-width: 300px;';
+            alert.innerHTML = `
+                <i class="bi bi-check-circle-fill me-2"></i>
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alert);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (alert.parentNode) {
+                    alert.remove();
+                }
+            }, 5000);
+        }
+        
+        // Show error message
+        function showError(message) {
+            const alert = document.createElement('div');
+            alert.className = 'alert alert-danger alert-dismissible fade show position-fixed';
+            alert.style.cssText = 'top: 20px; right: 20px; z-index: 1050; min-width: 300px;';
+            alert.innerHTML = `
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alert);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (alert.parentNode) {
+                    alert.remove();
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

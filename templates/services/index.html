@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Our Services | Zone Creators{% endblock %}
+
+{% block content %}
+    <!-- Hero Header -->
+    <section class="hero-section text-center py-5">
+        <div class="container">
+            <h1 class="hero-title">Our Services</h1>
+            <p class="hero-subtitle">Comprehensive Business Incubation & Growth Strategies</p>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                {% for service in services %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="service-card card h-100 border-0 shadow-sm p-4">
+                        <div class="card-body d-flex flex-column">
+                            <div class="service-icon mb-3 text-primary" style="font-size: 2rem;">
+                                <i class="bi {{ service.icon_class|default:'bi-gear' }}"></i>
+                            </div>
+                            <h4 class="service-title font-weight-bold" style="color: var(--deep-blue);">{{ service.title }}</h4>
+                            <h6 class="text-muted mb-3">{{ service.subtitle }}</h6>
+                            <p class="text-secondary flex-grow-1">{{ service.short_description }}</p>
+                            <a href="{% url 'service_detail' service.id %}" class="btn btn-outline-primary mt-3">View Full Details <i class="bi bi-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12 text-center py-5">
+                    <p class="lead text-muted">No services added yet. Log into the <a href="/admin/">Admin Panel</a> to add services.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

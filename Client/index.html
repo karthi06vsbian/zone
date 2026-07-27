@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Clients | Zone Creators</title>
+    <link rel="icon" href="logo.jpg" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Font Awesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Client Page Specific Styles */
+        .client-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(13, 16, 47, 0.1);
+            transition: all 0.4s ease;
+            margin-bottom: 30px;
+            height: 100%;
+        }
+        
+        .client-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(13, 16, 47, 0.15);
+        }
+        
+        .client-logo-container {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--light-gray) 0%, #f8f9fa 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .client-logo {
+            max-width: 100%;
+            max-height: 120px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .client-card:hover .client-logo {
+            transform: scale(1.05);
+        }
+        
+        .client-info {
+            padding: 25px;
+        }
+        
+        .client-name {
+            color: var(--deep-blue);
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .client-industry {
+            color: var(--metallic-gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .client-project {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .client-social {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .social-instagram {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+        }
+        
+        .social-linkedin {
+            background: #0077B5;
+        }
+        
+        .social-facebook {
+            background: #1877F2;
+        }
+        
+        .social-twitter {
+            background: #1DA1F2;
+        }
+        
+        .social-website {
+            background: var(--deep-blue);
+        }
+        
+        .social-youtube {
+            background: #FF0000;
+        }
+        
+        /* Video Section Styles */
+        .video-section {
+            background: linear-gradient(135deg, #1B2445 0%, #0D102F 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .video-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(181, 164, 116, 0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .video-container {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+            height: 100%;
+        }
+        
+        .insta-video-thumbnail {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .insta-video-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(13, 16, 47, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .video-container:hover .video-overlay {
+            opacity: 1;
+        }
+        
+        .video-container:hover .insta-video-thumbnail {
+            transform: scale(1.05);
+        }
+        
+        .play-btn {
+            width: 80px;
+            height: 80px;
+            background: var(--metallic-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .play-btn:hover {
+            transform: scale(1.1);
+            background: var(--light-gold);
+        }
+        
+        .video-info {
+            padding: 20px;
+            background: white;
+        }
+        
+        .video-title {
+            color: var(--deep-blue);
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .video-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+        
+        .insta-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 2;
+        }
+        
+        /* Achievements Section */
+        .achievements-section {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+        
+        .achievement-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(13, 16, 47, 0.1);
+            margin-bottom: 30px;
+            height: 100%;
+            transition: all 0.4s ease;
+            border-top: 5px solid transparent;
+        }
+        
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(13, 16, 47, 0.15);
+            border-top-color: var(--metallic-gold);
+        }
+        
+        .achievement-icon {
+            font-size: 3rem;
+            color: var(--metallic-gold);
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .achievement-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--deep-blue);
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .achievement-title {
+            color: var(--deep-blue);
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .achievement-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* Testimonials */
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(13, 16, 47, 0.1);
+            margin-bottom: 30px;
+            height: 100%;
+            border-top: 5px solid var(--metallic-gold);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(13, 16, 47, 0.15);
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .testimonial-content::before {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(181, 164, 116, 0.2);
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            font-family: Georgia, serif;
+        }
+        
+        .client-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--light-gold);
+        }
+        
+        .client-details {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .client-meta {
+            margin-left: 15px;
+        }
+        
+        .client-meta h5 {
+            color: var(--deep-blue);
+            font-weight: 700;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .client-meta .position {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+        
+        .rating {
+            color: var(--metallic-gold);
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+        
+        /* Filter and Stats */
+        .filter-buttons {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .filter-btn {
+            background: white;
+            border: 2px solid var(--light-gray);
+            color: var(--deep-blue);
+            padding: 10px 25px;
+            margin: 0 5px 10px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--deep-blue);
+            color: white;
+            border-color: var(--deep-blue);
+        }
+        
+        .stats-card-client {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(13, 16, 47, 0.1);
+            transition: all 0.4s ease;
+            margin-bottom: 30px;
+        }
+        
+        .stats-card-client:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(13, 16, 47, 0.15);
+        }
+        
+        .stats-number-client {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--deep-blue);
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .stats-label-client {
+            color: var(--metallic-gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+        
+        /* Review Form */
+        .review-form-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(13, 16, 47, 0.1);
+            margin-top: 50px;
+        }
+        
+        .form-title {
+            color: var(--deep-blue);
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-control {
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--metallic-gold);
+            box-shadow: 0 0 0 0.25rem rgba(181, 164, 116, 0.25);
+        }
+        
+        .stars-rating {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .star {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: color 0.2s ease;
+        }
+        
+        .star.active, .star:hover, .star:hover ~ .star {
+            color: var(--metallic-gold);
+        }
+        
+        /* Modal for Videos */
+        .video-modal .modal-content {
+            background: transparent;
+            border: none;
+        }
+        
+        .video-modal .modal-body {
+            padding: 0;
+        }
+        
+        .video-modal .btn-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: white;
+            opacity: 1;
+            z-index: 1000;
+        }
+        
+        .insta-embed-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        /* Industries */
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .industry-tag {
+            background: var(--light-gray);
+            padding: 10px 15px;
+            border-radius: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--deep-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .industry-tag:hover {
+            background: var(--metallic-gold);
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .client-logo-container {
+                height: 150px;
+                padding: 20px;
+            }
+            
+            .insta-video-thumbnail {
+                height: 300px;
+            }
+            
+            .play-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .review-form-container {
+                padding: 25px;
+            }
+            
+            .achievement-number {
+                font-size: 2rem;
+            }
+            
+            .achievement-icon {
+                font-size: 2.5rem;
+            }
+            
+            .insta-embed-container {
+                max-width: 100%;
+            }
+        }
+        
+        /* Instagram Video Grid */
+        .insta-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .insta-video-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .insta-video-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        /* Animation Styles */
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease forwards;
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Hexagon Badge */
+        .hexagon-badge {
+            display: inline-block;
+            background: var(--metallic-gold);
+            color: var(--deep-blue);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 8px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Corporate Success Stories Section */
+        .corporate-testimonials {
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .corporate-testimonials::before {
+            content: "";
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(13, 110, 253, 0.1) 0%, transparent 50%);
+            z-index: 0;
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .corporate-testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(13, 16, 47, 0.1);
+            margin-bottom: 30px;
+            height: 100%;
+            border-top: 5px solid var(--metallic-gold);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .corporate-testimonial-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .corporate-testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(13, 16, 47, 0.15);
+        }
+        
+        .corporate-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .corporate-logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .corporate-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .corporate-text {
+            flex-grow: 1;
+        }
+        
+        /* Floating animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating-card {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-card:nth-child(2) {
+            animation-delay: 1s;
+        }
+        
+        .floating-card:nth-child(3) {
+            animation-delay: 2s;
+        }
+        
+        /* Fix for alignment issues */
+        .corporate-testimonials .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title {
+            color: var(--deep-blue);
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .text-center .section-title {
+            margin-top: 0;
+        }
+        
+        /* Ensure proper spacing */
+        .mb-4 {
+            margin-bottom: 1.5rem !important;
+        }
+        
+        .mt-5 {
+            margin-top: 3rem !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+               <i class="bi bi-globe logo-icon"></i> Zone Creators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Service/">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/AboutUs/">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/Client/">Our Clients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ContactUs/">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title fade-in">Our Valued Clients</h1>
+            <p class="page-subtitle fade-in">Success stories, achievements, and testimonials from businesses we've transformed</p>
+        </div>
+    </div>
+    
+    <!-- Client Stats -->
+    <section class="py-5" style="background-color: var(--light-gray);">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="page-title" style="color: var(--deep-blue);">Client Success In Numbers</h2>
+                    <p class="lead">Our impact through measurable results</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stats-card-client">
+                        <span class="stats-number-client" data-count="200">0</span>
+                        <span class="stats-label-client">Happy Clients</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stats-card-client">
+                        <span class="stats-number-client" data-count="450">0</span>
+                        <span class="stats-label-client">Projects Completed</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stats-card-client">
+                        <span class="stats-number-client" data-count="95">0</span>
+                        <span class="stats-label-client">Retention Rate %</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stats-card-client">
+                        <span class="stats-number-client" data-count="15">0</span>
+                        <span class="stats-label-client">Industries Served</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Video Showcase -->
+    <section class="video-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="text-white mb-3 slide-up">Success Stories on Instagram</h2>
+                    <p class="text-light lead slide-up">Watch our client transformations and behind-the-scenes moments</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Company Instagram Video 1 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="video-container" data-bs-toggle="modal" data-bs-target="#instaModal1">
+                        <div class="insta-video-container">
+                            <div class="insta-badge">
+                                <i class="fab fa-instagram"></i> Instagram
+                            </div>
+                            <img src="hex.jpeg" alt="Hexagon Hydrogen Water Technology" class="insta-video-thumbnail">
+                            <div class="video-overlay">
+                                <div class="play-btn">
+                                    <i class="bi bi-play-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h5 class="video-title">Hexagon Hydrogen Water Technology</h5>
+                            <p class="video-description">Smart hydration solutions for wellness businesses</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Client Instagram Video 2 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="video-container" data-bs-toggle="modal" data-bs-target="#instaModal2">
+                        <div class="insta-video-container">
+                            <div class="insta-badge">
+                                <i class="fab fa-instagram"></i> Instagram
+                            </div>
+                            <img src="adi.jpeg" alt="Halal Profit Explained" class="insta-video-thumbnail">
+                            <div class="video-overlay">
+                                <div class="play-btn">
+                                    <i class="bi bi-play-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h5 class="video-title">Understanding Halal Profit</h5>
+                            <p class="video-description">Ethical Shariah-compliant investment principles</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Client Instagram Video 3 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="video-container" data-bs-toggle="modal" data-bs-target="#instaModal3">
+                        <div class="insta-video-container">
+                            <div class="insta-badge">
+                                <i class="fab fa-instagram"></i> Instagram
+                            </div>
+                            <img src="haji.jpeg" alt="Halal Profit Investment" class="insta-video-thumbnail">
+                            <div class="video-overlay">
+                                <div class="play-btn">
+                                    <i class="bi bi-play-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h5 class="video-title">Safe Halal Investment Returns</h5>
+                            <p class="video-description">Fair profit sharing built on trust and ethics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Instagram Video Grid -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h3 class="text-white text-center mb-4">More Instagram Content</h3>
+                    <div class="insta-video-grid">
+                        <!-- Video 4: Prabha's Journey -->
+                        <div class="insta-video-item" data-bs-toggle="modal" data-bs-target="#instaModal4">
+                            <img src="es.jpeg" alt="Prabha's inspiring journey" class="img-fluid w-100">
+                            <div class="p-3 bg-white">
+                                <p class="mb-0 small text-muted">Prabha's Inspiring Journey</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Video 5: Digital Transformation -->
+                        <div class="insta-video-item" data-bs-toggle="modal" data-bs-target="#instaModal5">
+                            <img src="in.jpeg" alt="Digital transformation strategy" class="img-fluid w-100">
+                            <div class="p-3 bg-white">
+                                <p class="mb-0 small text-muted">Digital Transformation Guide</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Video 6: Dua Power -->
+                        <div class="insta-video-item" data-bs-toggle="modal" data-bs-target="#instaModal6">
+                            <img src="metallic.jpeg" alt="Power of dua in business" class="img-fluid w-100">
+                            <div class="p-3 bg-white">
+                                <p class="mb-0 small text-muted">The Power of Dua in Business</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Video Modals -->
+    <!-- Modal for Video 1 -->
+    <div class="modal fade" id="instaModal1" tabindex="-1" aria-labelledby="instaModal1Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="instaModal1Label">Hexagon Hydrogen Water Technology</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Instagram Embed for Reel 1 -->
+                    <iframe src="https://www.instagram.com/reel/DTvOUHJjPui/embed/" 
+                            width="100%" 
+                            height="600" 
+                            frameborder="0" 
+                            scrolling="no" 
+                            allowtransparency="true">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Video 2 -->
+    <div class="modal fade" id="instaModal2" tabindex="-1" aria-labelledby="instaModal2Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="instaModal2Label">Understanding Halal Profit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Instagram Embed for Reel 2 -->
+                    <iframe src="https://www.instagram.com/reel/DTvKJtWgse4/embed/" 
+                            width="100%" 
+                            height="600" 
+                            frameborder="0" 
+                            scrolling="no" 
+                            allowtransparency="true">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Video 3 -->
+    <div class="modal fade" id="instaModal3" tabindex="-1" aria-labelledby="instaModal3Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="instaModal3Label">Safe Halal Investment Returns</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Instagram Embed for Reel 3 -->
+                    <iframe src="https://www.instagram.com/reel/DTaeae-CnHE/embed/" 
+                            width="100%" 
+                            height="600" 
+                            frameborder="0" 
+                            scrolling="no" 
+                            allowtransparency="true">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Video 4 -->
+    <div class="modal fade" id="instaModal4" tabindex="-1" aria-labelledby="instaModal4Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="instaModal4Label">Prabha's Inspiring Journey</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Instagram Embed for Reel 4 -->
+                    <iframe src="https://www.instagram.com/reel/DT3AHvUE6B2/embed/" 
+                            width="100%" 
+                            height="600" 
+                            frameborder="0" 
+                            scrolling="no" 
+                            allowtransparency="true">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Video 5 -->
+    <div class="modal fade" id="instaModal5" tabindex="-1" aria-labelledby="instaModal5Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="instaModal5Label">Digital Transformation Guide</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Instagram Embed for Reel 5 -->
+                    <iframe src="https://www.instagram.com/reel/DT0KsBqEYXE/embed/" 
+                            width="100%" 
+                            height="600" 
+                            frameborder="0" 
+                            scrolling="no" 
+                            allowtransparency="true">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Video 6 -->
+    <div class="modal fade" id="instaModal6" tabindex="-1" aria-labelledby="instaModal6Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="instaModal6Label">The Power of Dua in Business</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Instagram Embed for Post 6 -->
+                    <iframe src="https://www.instagram.com/p/DTvO7oLgeZr/embed/" 
+                            width="100%" 
+                            height="600" 
+                            frameborder="0" 
+                            scrolling="no" 
+                            allowtransparency="true">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Achievements Section -->
+    <section class="achievements-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="page-title" style="color: var(--deep-blue);">Our Client Achievements</h2>
+                    <p class="lead">Milestones and successes we've achieved together with our clients</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="achievement-card slide-up" style="animation-delay: 0.1s;">
+                        <i class="bi bi-graph-up-arrow achievement-icon"></i>
+                        <span class="achievement-number">250%</span>
+                        <h4 class="achievement-title">Average Revenue Growth</h4>
+                        <p class="achievement-description">Our clients experience an average revenue growth of 250% within the first year of partnership.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="achievement-card slide-up" style="animation-delay: 0.2s;">
+                        <i class="bi bi-award achievement-icon"></i>
+                        <span class="achievement-number">15+</span>
+                        <h4 class="achievement-title">Industry Awards</h4>
+                        <p class="achievement-description">Our clients have won over 15 industry awards for innovation and excellence.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="achievement-card slide-up" style="animation-delay: 0.3s;">
+                        <i class="bi bi-people achievement-icon"></i>
+                        <span class="achievement-number">2.5M+</span>
+                        <h4 class="achievement-title">Digital Reach</h4>
+                        <p class="achievement-description">Collective digital reach of over 2.5 million across all client platforms.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="achievement-card slide-up" style="animation-delay: 0.4s;">
+                        <i class="bi bi-globe achievement-icon"></i>
+                        <span class="achievement-number">25+</span>
+                        <h4 class="achievement-title">Countries Reached</h4>
+                        <p class="achievement-description">Our clients have expanded to over 25 countries with our global strategy support.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="achievement-card slide-up" style="animation-delay: 0.5s;">
+                        <i class="bi bi-lightning achievement-icon"></i>
+                        <span class="achievement-number">85%</span>
+                        <h4 class="achievement-title">Faster Time-to-Market</h4>
+                        <p class="achievement-description">Clients launch products 85% faster with our incubation framework.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="achievement-card slide-up" style="animation-delay: 0.6s;">
+                        <i class="bi bi-shield-check achievement-icon"></i>
+                        <span class="achievement-number">100%</span>
+                        <h4 class="achievement-title">Client Satisfaction</h4>
+                        <p class="achievement-description">Every client has reported significant improvement in their business metrics.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Client Showcase  TEST-->
+    <section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="page-title" style="color: var(--deep-blue);">Our Featured Clients</h2>
+                <p class="lead">Businesses that have grown with Zone Creators</p>
+            </div>
+        </div>
+        
+        <!-- Filter Buttons -->
+        <div class="filter-buttons" id="filterButtons">
+            <button class="filter-btn active" data-filter="all">All Industries</button>
+            <button class="filter-btn" data-filter="construction">Construction</button>
+            <button class="filter-btn" data-filter="healthcare">Healthcare</button>
+            <button class="filter-btn" data-filter="automotive">Automotive</button>
+            <button class="filter-btn" data-filter="fitness">Fitness</button>
+            <button class="filter-btn" data-filter="finance">Finance</button>
+            <button class="filter-btn" data-filter="retail">Retail</button>
+        </div>
+        
+        <!-- Clients Grid -->
+        <div class="row" id="clientsGrid">
+            <div class="col-12 text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBHh0uFk3gyA0osz2ogqcXmQfXPoMOgjUY",
+        authDomain: "zone-client-b5a61.firebaseapp.com",
+        projectId: "zone-client-b5a61",
+        storageBucket: "zone-client-b5a61.firebasestorage.app",
+        messagingSenderId: "8225962828",
+        appId: "1:8225962828:web:26331d445212ad43e22de9",
+        measurementId: "G-EGLQ74D69E"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    function generateStars(rating) {
+        let starsHtml = '';
+        for (let i = 1; i <= 5; i++) {
+            if (i <= Math.floor(rating)) starsHtml += '<i class="bi bi-star-fill"></i>';
+            else if (i - 0.5 <= rating) starsHtml += '<i class="bi bi-star-half"></i>';
+            else starsHtml += '<i class="bi bi-star"></i>';
+        }
+        return starsHtml;
+    }
+
+    async function loadClients() {
+        const grid = document.getElementById('clientsGrid');
+        try {
+            const querySnapshot = await getDocs(collection(db, "clients"));
+            grid.innerHTML = '';
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                grid.innerHTML += `
+                    <div class="col-lg-4 col-md-6 mb-4 client-item" data-industry="${data.industry}">
+                        <div class="client-card">
+                            <div class="client-logo-container">
+                                <img src="${data.logoUrl}" class="client-logo" onerror="this.src='https://via.placeholder.com/400x200';">
+                            </div>
+                            <div class="client-info">
+                                <h4 class="client-name">${data.name}</h4>
+                                <span class="client-industry">${data.industryDisplay}</span>
+                                <p class="client-project">${data.description}</p>
+                                <div class="client-social">
+                                    ${data.instagram ? `<a href="${data.instagram}" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>` : ''}
+                                    ${data.website ? `<a href="${data.website}" class="social-icon" target="_blank"><i class="fas fa-globe"></i></a>` : ''}
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <span class="rating">${generateStars(data.rating)} <span class="ms-1">${data.rating}</span></span>
+                                    <span class="text-muted small">Since ${data.since}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+            setupFiltering();
+        } catch (e) { grid.innerHTML = "Error loading clients."; }
+    }
+
+    function setupFiltering() {
+        const buttons = document.querySelectorAll('.filter-btn');
+        const items = document.querySelectorAll('.client-item');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+                items.forEach(item => {
+                    item.style.display = (filter === 'all' || item.getAttribute('data-industry') === filter) ? 'block' : 'none';
+                });
+            });
+        });
+    }
+    loadClients();
+</script>
+
+    <!--TEST ENDS HERE -->
+    
+    <!-- Testimonials Section -->
+    <section class="py-5" style="background-color: var(--light-gray);">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="page-title" style="color: var(--deep-blue);">Client Testimonials</h2>
+                    <p class="lead">What our clients say about working with Zone Creators</p>
+                </div>
+            </div>
+            
+            <div class="row" id="testimonialsContainer">
+                <!-- Testimonial 1 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="testimonial-card slide-up" style="animation-delay: 0.1s;">
+                        <div class="testimonial-content">
+                            Zone Creators transformed our business completely. Their strategic approach to digital marketing helped us increase online revenue by 250% in just 6 months. Truly exceptional partners!
+                        </div>
+                        <div class="client-details">
+                            <img src="srinathi.png" alt="sri" class="client-avatar"
+                                 onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'; this.alt='John Doe'">
+                            <div class="client-meta">
+                                <h5>Srinathipicks</h5>
+                                <p class="position">CEO, Srinathipicks</p>
+                                <div class="rating">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="testimonial-card slide-up" style="animation-delay: 0.2s;">
+                        <div class="testimonial-content">
+                            As a startup, we needed partners who could grow with us. Zone Creators provided continuous support and their business incubation approach is exactly what emerging companies need.
+                        </div>
+                        <div class="client-details">
+                            <img src="Eswara logo-.jpg" alt="Sarah Miller" class="client-avatar"
+                                 onerror="this.src='https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face'; this.alt='Sarah Miller'">
+                            <div class="client-meta">
+                                <h5>Eswara Sand</h5>
+                                <p class="position">Founder, Eswara m-sand</p>
+                                <div class="rating">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="testimonial-card slide-up" style="animation-delay: 0.3s;">
+                        <div class="testimonial-content">
+                            The team understands the healthcare industry deeply. They helped us build a patient-centric digital platform that improved our service delivery significantly. Highly recommended!
+                        </div>
+                        <div class="client-details">
+                            <img src="grip.png" alt="Dr. Rajesh Kumar" class="client-avatar"
+                                 onerror="this.src='https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=150&h=150&fit=crop&crop=face'; this.alt='Dr. Rajesh Kumar'">
+                            <div class="client-meta">
+                                <h5>Grip Business Forum</h5>
+                                <p class="position">Director, Grip Business Forum</p>
+                                <div class="rating">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Corporate Testimonials Section -->
+    <section class="corporate-testimonials">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Our Corporate Success Stories</h2>
+                <p class="section-subtitle">See how our HEXAGON strategy transforms businesses</p>
+                <div class="hexagon-badge slide-up">TRUSTED BY INDUSTRY LEADERS</div>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Testimonial 1 - HEXAGON -->
+                <div class="col-lg-4">
+                    <div class="corporate-testimonial-card floating-card">
+                        <div class="corporate-content p-4 h-100">
+                            <div class="d-flex align-items-center mb-4">
+                                <!-- Logo for HEXAGON -->
+                                <div class="me-3">
+                                    <img src="https://zonecreators.devopschanakya.space/hexagon.png" alt="HEXAGON Logo" class="corporate-logo" 
+                                         onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><polygon points=%2250,5 95,30 95,70 50,95 5,70 5,30%22 fill=%22%230d6efd%22 stroke=%22%23d4af37%22 stroke-width=%222%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2220%22>H</text></svg>'">
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">HEXAGON</h5>
+                                    <small class="text-muted">Corporate Strategy Partners</small>
+                                    <div class="mt-1">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="corporate-text mb-3">
+                                <p class="mb-3">"Zone Creators implemented their namesake HEXAGON strategy for our corporate expansion. The results transformed our franchise network from regional to national presence in just 18 months."</p>
+                                <p>"Their corporate marketing approach is now our standard operating procedure across all locations."</p>
+                            </div>
+                            <div class="mt-auto">
+                                <div class="hexagon-badge">HEXAGON STRATEGY IMPLEMENTED</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 - GRIP -->
+                <div class="col-lg-4">
+                    <div class="corporate-testimonial-card floating-card">
+                        <div class="corporate-content p-4 h-100">
+                            <div class="d-flex align-items-center mb-4">
+                                <!-- Logo for GRIP -->
+                                <div class="me-3">
+                                    <img src="https://zonecreators.devopschanakya.space/grip.png" alt="GRIP Logo" class="corporate-logo"
+                                         onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2215%22 fill=%22%23d4af37%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%230d6efd%22 font-size=%2230%22 font-weight=%22bold%22>G</text></svg>'">
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">GRIP</h5>
+                                    <small class="text-muted">B2B Manufacturing Solutions</small>
+                                    <div class="mt-1">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-half text-warning"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="corporate-text mb-3">
+                                <p class="mb-3">"Zone Creators' franchise marketing expertise helped us establish a strong B2B presence across multiple states. Their hexagon approach to corporate branding gave us the competitive edge we needed."</p>
+                                <p>"The franchise development strategy they implemented increased our market share by 45% in the first year."</p>
+                            </div>
+                            <div class="mt-auto">
+                                <div class="hexagon-badge">FRANCHISE EXPANSION EXPERTS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 - ALTRONE -->
+                <div class="col-lg-4">
+                    <div class="corporate-testimonial-card floating-card">
+                        <div class="corporate-content p-4 h-100">
+                            <div class="d-flex align-items-center mb-4">
+                                <!-- Logo for ALTRONE -->
+                                <div class="me-3">
+                                    <img src="https://zonecreators.in/altron.jpeg" alt="ALTRONE Logo" class="corporate-logo"
+                                         onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%230d6efd%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2225%22 font-weight=%22bold%22>A</text></svg>'">
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">ALTRONE</h5>
+                                    <small class="text-muted">Corporate Technology Solutions</small>
+                                    <div class="mt-1">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="corporate-text mb-3">
+                                <p class="mb-3">"We were struggling with corporate client acquisition in the B2B space. Zone Creators' Altron strategy, combined with their deep understanding of franchise markets, tripled our corporate bookings."</p>
+                                <p>"Their corporate marketing approach delivered measurable ROI within the first quarter of implementation."</p>
+                            </div>
+                            <div class="mt-auto">
+                                <div class="hexagon-badge">CORPORATE MARKETING SPECIALISTS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="py-5" style="background: linear-gradient(135deg, var(--deep-blue) 0%, var(--dark-navy) 100%);">
+        <div class="container text-center">
+            <h2 class="text-white mb-4">Ready to Be Our Next Success Story?</h2>
+            <p class="text-light mb-4">Join 200+ businesses that have transformed with Zone Creators.</p>
+            <a href="../ContactUs/index.html" class="btn btn-gold btn-lg me-3">Start Your Journey</a>
+            <a href="../Service/index.html" class="btn btn-outline-light btn-lg">Explore Our Services</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h3 class="footer-title">Zone Creators</h3>
+                    <p>We are not a digital marketing agency. We are business incubators.</p>
+                    <p>From idea validation to business growth, we provide complete marketing, branding & business growth solutions.</p>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="/">Home</a></li>
+                        <li class="mb-2"><a href="/Service/">Our Services</a></li>
+                        <li class="mb-2"><a href="/AboutUs/">About Us</a></li>
+                        <li class="mb-2"><a href="/Client/">Our Clients</a></li> 
+                        <li class="mb-2"><a href="/ContactUs/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h3 class="footer-title">Contact Info</h3>
+                    <p><i class="bi bi-envelope me-2"></i> zonecreators1106@gmail.com</p>
+                    <p><i class="bi bi-telephone me-2"></i> +91 72008 31314</p>
+                    <p><i class="bi bi-geo-alt me-2"></i> 30 A, NACHIVALASU,KOOTHAMPATTI (P.T), ARACHALUR, ERODE - 638101</p>
+                    <div class="social-icons mt-3">
+                        <a href="https://www.instagram.com/zone_creators/"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="text-center">
+            <p>&copy; 2026 Zone Creators. All rights reserved.</p>
+            <p>
+                Web Solution By 
+                <a href="https://www.devopschanakya.space/" target="_blank" class="text-light" style="text-decoration: none;">
+                    <i class="bi bi-code-slash me-1"></i>DevopsChanakya
+                </a>
+            </p>
+        </div>
+        </div>
+    </footer>
+ 
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Counter animation for stats
+            const counters = document.querySelectorAll('.stats-number-client');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const animate = () => {
+                    const value = +counter.getAttribute('data-count');
+                    const data = +counter.innerText;
+                    
+                    const time = value / speed;
+                    if(data < value) {
+                        counter.innerText = Math.ceil(data + time);
+                        setTimeout(animate, 1);
+                    } else {
+                        counter.innerText = value;
+                    }
+                }
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animate();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                observer.observe(counter);
+            });
+            
+            // Client Filtering
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const clientCards = document.querySelectorAll('[data-industry]');
+            const industryTags = document.querySelectorAll('.industry-tag[data-filter]');
+            
+            const filterClients = (filterValue) => {
+                clientCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-industry') === filterValue) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            };
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    const filterValue = this.getAttribute('data-filter');
+                    filterClients(filterValue);
+                });
+            });
+            
+            industryTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const filterValue = this.getAttribute('data-filter');
+                    filterButtons.forEach(btn => {
+                        btn.classList.toggle('active', btn.getAttribute('data-filter') === filterValue);
+                    });
+                    filterClients(filterValue);
+                });
+            });
+            
+            // Star Rating System
+            const stars = document.querySelectorAll('.star');
+            const ratingValue = document.getElementById('ratingValue');
+            
+            if (stars.length > 0 && ratingValue) {
+                stars.forEach(star => {
+                    star.addEventListener('click', function() {
+                        const value = this.getAttribute('data-value');
+                        ratingValue.value = value;
+                        
+                        stars.forEach((s, index) => {
+                            if (index < value) {
+                                s.innerHTML = '<i class="bi bi-star-fill"></i>';
+                                s.classList.add('active');
+                            } else {
+                                s.innerHTML = '<i class="bi bi-star"></i>';
+                                s.classList.remove('active');
+                            }
+                        });
+                    });
+                    
+                    star.addEventListener('mouseover', function() {
+                        const value = this.getAttribute('data-value');
+                        stars.forEach((s, index) => {
+                            if (index < value) {
+                                s.innerHTML = '<i class="bi bi-star-fill"></i>';
+                            }
+                        });
+                    });
+                    
+                    star.addEventListener('mouseout', function() {
+                        const currentRating = ratingValue.value;
+                        stars.forEach((s, index) => {
+                            if (index >= currentRating) {
+                                s.innerHTML = '<i class="bi bi-star"></i>';
+                            }
+                        });
+                    });
+                });
+            }
+            
+            // Review Form Submission
+            const reviewForm = document.getElementById('reviewForm');
+            const testimonialsContainer = document.getElementById('testimonialsContainer');
+            
+            if (reviewForm && testimonialsContainer) {
+                reviewForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('clientName').value;
+                    const company = document.getElementById('clientCompany').value;
+                    const position = document.getElementById('clientPosition').value;
+                    const review = document.getElementById('clientReview').value;
+                    const rating = parseInt(ratingValue.value);
+                    
+                    if (rating === 0) {
+                        alert('Please provide a rating before submitting.');
+                        return;
+                    }
+                    
+                    const newTestimonial = document.createElement('div');
+                    newTestimonial.className = 'col-lg-4 col-md-6 mb-4';
+                    newTestimonial.innerHTML = `
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                ${review}
+                            </div>
+                            <div class="client-details">
+                                <div class="client-avatar" style="background: linear-gradient(135deg, var(--deep-blue), var(--dark-navy)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                                    <i class="bi bi-person"></i>
+                                </div>
+                                <div class="client-meta">
+                                    <h5>${name}</h5>
+                                    <p class="position">${position}${company ? ', ' + company : ''}</p>
+                                    <div class="rating">
+                                        ${'<i class="bi bi-star-fill"></i>'.repeat(rating)}${rating < 5 ? '<i class="bi bi-star"></i>'.repeat(5 - rating) : ''}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    testimonialsContainer.prepend(newTestimonial);
+                    reviewForm.reset();
+                    stars.forEach(star => {
+                        star.innerHTML = '<i class="bi bi-star"></i>';
+                        star.classList.remove('active');
+                    });
+                    ratingValue.value = '0';
+                    
+                    alert('Thank you for your testimonial! Your review has been submitted successfully.');
+                });
+            }
+            
+            // Animation for corporate testimonial cards
+            const corporateCards = document.querySelectorAll('.corporate-testimonial-card');
+            const corporateObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('animate');
+                        }, 200 * index);
+                        corporateObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            corporateCards.forEach(card => {
+                corporateObserver.observe(card);
+            });
+            
+            // Add animation to existing elements
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.2}s`;
+            });
+            
+            const slideElements = document.querySelectorAll('.slide-up');
+            slideElements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.2}s`;
+            });
+            
+            // Logo fallback functionality
+            const logoImages = document.querySelectorAll('.corporate-logo');
+            logoImages.forEach(img => {
+                img.addEventListener('error', function() {
+                    // Keep the current SVG fallback
+                });
+            });
+        });
+    </script>
+    <script src="../js/chatbot.js"></script>
+    <script src="../js/animations.js"></script>
+</body>
+</html>

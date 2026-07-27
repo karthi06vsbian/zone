@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ service.title|default:"Service Details" }} | Zone Creators{% endblock %}
+
+{% block content %}
+    <!-- Hero Header -->
+    <section class="hero-section text-center py-4">
+        <div class="container">
+            <h1 class="hero-title">{{ service.title }}</h1>
+            <p class="hero-subtitle">{{ service.subtitle }}</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Service Detail View -->
+                <div class="col-lg-8 mb-4">
+                    <div class="card border-0 shadow-sm p-4">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="service-icon me-3 text-primary" style="font-size: 2.5rem;">
+                                    <i class="bi {{ service.icon_class|default:'bi-star' }}"></i>
+                                </div>
+                                <div>
+                                    <h2 class="m-0" style="color: var(--deep-blue);">{{ service.title }}</h2>
+                                    <span class="text-muted">{{ service.subtitle }}</span>
+                                </div>
+                            </div>
+                            <hr>
+                            <h4 class="mb-3">Overview</h4>
+                            <p class="lead">{{ service.short_description }}</p>
+                            
+                            <h4 class="mt-4 mb-3">Detailed Approach</h4>
+                            <p style="line-height: 1.8;">{{ service.detailed_description|linebreaks }}</p>
+
+                            <div class="mt-5 p-4 rounded bg-light border-left" style="border-left: 4px solid var(--metallic-gold);">
+                                <h5>Ready to scale your business with {{ service.title }}?</h5>
+                                <p class="mb-3">Get in touch with our team of incubator specialists today.</p>
+                                <a href="{% url 'contact' %}" class="btn btn-primary">Schedule a Free Consultation</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar Services List -->
+                <div class="col-lg-4">
+                    <div class="card border-0 shadow-sm p-4">
+                        <h4 class="mb-3" style="color: var(--deep-blue);">All Services</h4>
+                        <div class="list-group list-group-flush">
+                            {% for item in all_services %}
+                            <a href="{% url 'service_detail' item.id %}" class="list-group-item list-group-item-action border-0 px-0 py-3 d-flex justify-content-between align-items-center {% if item.id == service.id %}fw-bold text-primary{% endif %}">
+                                <span><i class="bi {{ item.icon_class }} me-2"></i> {{ item.title }}</span>
+                                <i class="bi bi-chevron-right text-muted"></i>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

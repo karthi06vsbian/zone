@@ -1,0 +1,48 @@
+{% extends "admin/index.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div class="admin-stats-grid">
+    <div class="stat-card">
+        <div class="stat-info">
+            <h3>{{ total_clients|default:"0" }}</h3>
+            <p>Active Clients</p>
+        </div>
+        <div class="stat-icon">
+            <i class="bi bi-people-fill"></i>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-info">
+            <h3>{{ total_services|default:"0" }}</h3>
+            <p>Incubator Services</p>
+        </div>
+        <div class="stat-icon">
+            <i class="bi bi-gear-wide-connected"></i>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-info">
+            <h3>{{ total_leadership|default:"0" }}</h3>
+            <p>Team Members</p>
+        </div>
+        <div class="stat-icon">
+            <i class="bi bi-person-badge-fill"></i>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-info">
+            <h3>{{ total_messages|default:"0" }}</h3>
+            <p>Contact Messages</p>
+        </div>
+        <div class="stat-icon">
+            <i class="bi bi-envelope-paper-fill"></i>
+        </div>
+    </div>
+</div>
+
+{{ block.super }}
+{% endblock %}

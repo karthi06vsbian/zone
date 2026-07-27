@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Zone Creators</title>
+    <link rel="icon" href="logo.jpg" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Additional styles for contact page */
+        .contact-info-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(13, 16, 47, 0.1);
+            margin-bottom: 30px;
+            height: 100%;
+            transition: all 0.4s ease;
+            border-left: 5px solid var(--metallic-gold);
+        }
+        
+        .contact-info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(13, 16, 47, 0.15);
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--deep-blue), var(--dark-navy));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon.gold {
+            background: linear-gradient(135deg, var(--metallic-gold), var(--light-gold));
+            color: var(--dark-navy);
+        }
+        
+        .form-control, .form-select {
+            border: 2px solid rgba(13, 16, 47, 0.1);
+            border-radius: 8px;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--metallic-gold);
+            box-shadow: 0 0 0 3px rgba(181, 164, 116, 0.2);
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--deep-blue);
+            margin-bottom: 8px;
+        }
+        
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(13, 16, 47, 0.1);
+            height: 400px;
+            margin-bottom: 30px;
+        }
+        
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--deep-blue), var(--dark-navy));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-direction: column;
+        }
+        
+        .faq-item {
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(13, 16, 47, 0.05);
+        }
+        
+        .faq-question {
+            background: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background-color: rgba(181, 164, 116, 0.05);
+        }
+        
+        .faq-question h5 {
+            color: var(--deep-blue);
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        .faq-answer {
+            background: white;
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        .faq-item.active .faq-question {
+            border-bottom: 2px solid var(--metallic-gold);
+        }
+        
+        .faq-toggle {
+            color: var(--metallic-gold);
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+        
+        .contact-success {
+            display: none;
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            color: #155724;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .contact-success.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+              <i class="bi bi-globe logo-icon"></i> Zone Creators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Service/">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/AboutUs/">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Client/">our client</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/ContactUs/">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">Contact Us</h1>
+            <p class="page-subtitle">Get in touch to discuss how we can help grow your business</p>
+        </div>
+    </div>
+    
+    <!-- Contact Info Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="contact-info-card">
+                        <div class="contact-icon">
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+                        <h4>Our Office</h4>
+                        <p>30 A, NACHIVALASU <br>
+                            KOOTHAMPATTI (P.T) <br>
+                             ARACHALUR <br>
+                              ERODE - 638101</p>
+                        <a href="#" class="btn btn-outline-primary btn-sm">Get Directions</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="contact-info-card">
+                        <div class="contact-icon gold">
+                            <i class="bi bi-envelope"></i>
+                        </div>
+                        <h4>Email Us</h4>
+                        <p><strong>General Inquiries:</strong><br>
+                           zonecreators1106@gmail.com</p>
+                        <p><strong>Support:</strong><br>
+                           support@zonecreators.com</p>
+                        <a href="mailto:zonecreators1106@gmail.com" class="btn btn-outline-primary btn-sm">Send Email</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="contact-info-card">
+                        <div class="contact-icon">
+                            <i class="bi bi-telephone"></i>
+                        </div>
+                        <h4>Call Us</h4>
+                        <p><strong>Sales & New Business:</strong><br>
+                           +91 72008 31314</p>
+                        <p><strong>Support & Existing Clients:</strong><br>
+                           +1 (555) 987-6543</p>
+                        <a href="tel:+15551234567" class="btn btn-outline-primary btn-sm">Call Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Map -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="map-container">
+                        <div class="map-placeholder">
+                            <i class="bi bi-geo-alt-fill display-1 mb-3"></i>
+                            <h4>Zone Creators Headquarters</h4>
+                            <p>30 A, NACHIVALASU,KOOTHAMPATTI (P.T), ARACHALUR, ERODE - 638101</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Form & Business Hours 
+            <div class="row">
+                <div class="col-lg-8 mb-4">
+                    <div class="service-detail-card">
+                        <h3 class="service-title mb-4">Send Us a Message</h3>
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="company" class="form-label">Company Name</label>
+                                    <input type="text" class="form-control" id="company">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="service" class="form-label">Service Interested In</label>
+                                <select class="form-select" id="service">
+                                    <option value="" selected>Select a service</option>
+                                    <option value="content-marketing">Content Marketing</option>
+                                    <option value="brand-development">Brand Development</option>
+                                    <option value="online-marketing">Online Marketing</option>
+                                    <option value="social-media">Social Media Management</option>
+                                    <option value="linkedin">LinkedIn Marketing</option>
+                                    <option value="sem">SEM (Search Engine Marketing)</option>
+                                    <option value="seo">SEO (Search Engine Optimization)</option>
+                                    <option value="offline-marketing">Offline Marketing</option>
+                                    <option value="web-development">Web Development</option>
+                                    <option value="training">Marketing Team Training</option>
+                                    <option value="video-editing">Video Editing</option>
+                                    <option value="graphic-design">Graphic Design</option>
+                                    <option value="logo-creation">Logo Creation</option>
+                                    <option value="business-development">Business Idea & Development</option>
+                                    <option value="multiple">Multiple Services</option>
+                                    <option value="not-sure">Not Sure - Need Consultation</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="budget" class="form-label">Project Budget</label>
+                                <select class="form-select" id="budget">
+                                    <option value="" selected>Select budget range</option>
+                                    <option value="under-5k">Under $5,000</option>
+                                    <option value="5k-10k">$5,000 - $10,000</option>
+                                    <option value="10k-25k">$10,000 - $25,000</option>
+                                    <option value="25k-50k">$25,000 - $50,000</option>
+                                    <option value="50k-plus">$50,000+</option>
+                                    <option value="not-sure">Not Sure / Need Quote</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message *</label>
+                                <textarea class="form-control" id="message" rows="5" placeholder="Tell us about your project, goals, and timeline..." required></textarea>
+                            </div>
+                            
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="newsletter" checked>
+                                <label class="form-check-label" for="newsletter">Subscribe to our newsletter for marketing tips and insights</label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                        </form>
+                        
+
+                        <!-FORM END HERE -->
+<!--
+                        <div class="contact-success" id="contactSuccess">
+                            <i class="bi bi-check-circle-fill display-4 mb-3"></i>
+                            <h4>Thank You for Your Message!</h4>
+                            <p>We have received your inquiry and will get back to you within 24 hours.</p>
+                            <p class="small">A confirmation email has been sent to <span id="userEmail"></span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <div class="service-detail-card">
+                        <h3 class="service-title mb-4">Business Hours</h3>
+                        <div class="mb-4">
+                            <h5 class="fw-bold" style="color: var(--metallic-gold);">Regular Hours</h5>
+                            <p><i class="bi bi-clock me-2"></i> Monday - Friday: 9:00 AM - 6:00 PM</p>
+                            <p><i class="bi bi-clock me-2"></i> Saturday: 10:00 AM - 2:00 PM</p>
+                            <p><i class="bi bi-clock me-2"></i> Sunday: Closed</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="fw-bold" style="color: var(--metallic-gold);">Holiday Closures</h5>
+                            <p class="small">We observe major holidays including New Year's Day, Independence Day, Thanksgiving, and Christmas. Emergency support is available for existing clients.</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="fw-bold" style="color: var(--metallic-gold);">Response Time</h5>
+                            <p class="small">We respond to all inquiries within 24 hours during business days. For urgent matters, please call our support line.</p>
+                        </div>
+                        
+                        <div>
+                            <h5 class="fw-bold" style="color: var(--metallic-gold);">Follow Us</h5>
+                            <div class="social-icons mt-3">
+                                <a href="#" class="btn btn-outline-primary me-2 mb-2"><i class="bi bi-facebook me-1"></i></a>
+                                <a href="#" class="btn btn-outline-primary me-2 mb-2"><i class="bi bi-instagram me-1"></i></a>
+                               <a href="#" class="btn btn-outline-primary me-2 mb-2"><i class="bi bi-linkedin me-1"></i></a>
+                         href="#" class="btn btn-outline-primary me-2 mb-2"><i class="bi bi-twitter me-1"></i></a>
+                                <a href="#" class="btn btn-outline-primary mb-2"><i class="bi bi-youtube me-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="service-detail-card mt-4">
+                        <h3 class="service-title mb-4">Schedule a Call</h3>
+                        <p>Prefer to speak directly with our team?</p>
+                        <p class="small text-muted mb-3">Book a 30-minute consultation call at your convenience.</p>
+                        <a href="#" class="btn btn-gold w-100">Book a Consultation</a>
+                    </div>
+                </div>
+            </div>
+            
+        -->
+<!---Firebase Form Started - ->>
+
+<!-- Contact Form & Business Hours -->
+<div class="row">
+    <div class="col-lg-8 mb-4">
+        <div class="service-detail-card">
+            <h3 class="service-title mb-4">Send Us a Message</h3>
+            
+            <!-- Success Message (hidden by default) -->
+            <div class="alert alert-success alert-dismissible fade" id="successMessage" role="alert" style="display: none;">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-check-circle-fill me-2" style="font-size: 1.5rem;"></i>
+                    <div>
+                        <h5 class="mb-1">Thank You for Your Message!</h5>
+                        <p class="mb-0">We have received your inquiry and will get back to you within 24 hours.</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            
+            <!-- Error Message (hidden by default) -->
+            <div class="alert alert-danger alert-dismissible fade" id="errorMessage" role="alert" style="display: none;">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-exclamation-triangle-fill me-2" style="font-size: 1.5rem;"></i>
+                    <div>
+                        <h5 class="mb-1">Oops! Something went wrong</h5>
+                        <p class="mb-0" id="errorText">Please try again or contact us directly.</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            
+            <form id="contactForm">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="name" class="form-label">Full Name *</label>
+                        <input type="text" class="form-control" id="name" required>
+                        <div class="invalid-feedback">Please enter your full name.</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label">Email Address *</label>
+                        <input type="email" class="form-control" id="email" required>
+                        <div class="invalid-feedback">Please enter a valid email address.</div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="company" class="form-label">Company Name</label>
+                        <input type="text" class="form-control" id="company">
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="service" class="form-label">Service Interested In</label>
+                    <select class="form-select" id="service">
+                        <option value="" selected>Select a service</option>
+                        <option value="content-marketing">Content Marketing</option>
+                        <option value="brand-development">Brand Development</option>
+                        <option value="online-marketing">Online Marketing</option>
+                        <option value="social-media">Social Media Management</option>
+                        <option value="linkedin">LinkedIn Marketing</option>
+                        <option value="sem">SEM (Search Engine Marketing)</option>
+                        <option value="seo">SEO (Search Engine Optimization)</option>
+                        <option value="offline-marketing">Offline Marketing</option>
+                        <option value="web-development">Web Development</option>
+                        <option value="training">Marketing Team Training</option>
+                        <option value="video-editing">Video Editing</option>
+                        <option value="graphic-design">Graphic Design</option>
+                        <option value="logo-creation">Logo Creation</option>
+                        <option value="business-development">Business Idea & Development</option>
+                        <option value="multiple">Multiple Services</option>
+                        <option value="not-sure">Not Sure - Need Consultation</option>
+                    </select>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="budget" class="form-label">Project Budget</label>
+                    <select class="form-select" id="budget">
+                        <option value="" selected>Select budget range</option>
+                        <option value="under-5k">Under $5,000</option>
+                        <option value="5k-10k">$5,000 - $10,000</option>
+                        <option value="10k-25k">$10,000 - $25,000</option>
+                        <option value="25k-50k">$25,000 - $50,000</option>
+                        <option value="50k-plus">$50,000+</option>
+                        <option value="not-sure">Not Sure / Need Quote</option>
+                    </select>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message *</label>
+                    <textarea class="form-control" id="message" rows="5" placeholder="Tell us about your project, goals, and timeline..." required></textarea>
+                    <div class="invalid-feedback">Please enter your message.</div>
+                </div>
+                
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="newsletter" checked>
+                    <label class="form-check-label" for="newsletter">Subscribe to our newsletter for marketing tips and insights</label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                    <span id="submitText">Send Message</span>
+                    <span class="spinner-border spinner-border-sm d-none" id="loadingSpinner"></span>
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="col-lg-4 mb-4">
+        <div class="service-detail-card">
+            <h3 class="service-title mb-4">Business Hours</h3>
+            <div class="mb-4">
+                <h5 class="fw-bold" style="color: var(--metallic-gold);">Regular Hours</h5>
+                <p><i class="bi bi-clock me-2"></i> Monday - Friday: 9:00 AM - 6:00 PM</p>
+                <p><i class="bi bi-clock me-2"></i> Saturday: 10:00 AM - 2:00 PM</p>
+                <p><i class="bi bi-clock me-2"></i> Sunday: Closed</p>
+            </div>
+            
+            <div class="mb-4">
+                <h5 class="fw-bold" style="color: var(--metallic-gold);">Holiday Closures</h5>
+                <p class="small">We observe major holidays including New Year's Day, Independence Day, Thanksgiving, and Christmas. Emergency support is available for existing clients.</p>
+            </div>
+            
+            <div class="mb-4">
+                <h5 class="fw-bold" style="color: var(--metallic-gold);">Response Time</h5>
+                <p class="small">We respond to all inquiries within 24 hours during business days. For urgent matters, please call our support line.</p>
+            </div>
+            
+            <div>
+                <h5 class="fw-bold" style="color: var(--metallic-gold);">Follow Us</h5>
+                <div class="social-icons mt-3">
+                    <a href="#" class="btn btn-outline-primary me-2 mb-2"><i class="bi bi-facebook me-1"></i></a>
+                    <a href="#" class="btn btn-outline-primary me-2 mb-2"><i class="bi bi-instagram me-1"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="service-detail-card mt-4">
+            <h3 class="service-title mb-4">Schedule a Call</h3>
+            <p>Prefer to speak directly with our team?</p>
+            <p class="small text-muted mb-3">Book a 30-minute consultation call at your convenience.</p>
+            <a href="#" class="btn btn-gold w-100">Book a Consultation</a>
+        </div>
+    </div>
+</div>
+
+<!-- Firebase SDK (compatibility version to avoid import errors) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<script>
+// ============================================
+// FIREBASE CONFIGURATION
+// ============================================
+// REPLACE WITH YOUR FIREBASE CONFIG
+const firebaseConfig = {
+   apiKey: "AIzaSyCJc2EMs7Jr3uPifvIgZvOj9e6WrmEs6eI",
+  authDomain: "zonecreators-e46b4.firebaseapp.com",
+  projectId: "zonecreators-e46b4",
+  storageBucket: "zonecreators-e46b4.firebasestorage.app",
+  messagingSenderId: "277260253298",
+  appId: "1:277260253298:web:0bea063024726689662aeb"
+
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// ============================================
+// FORM HANDLING
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitText = document.getElementById('submitText');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+    const errorText = document.getElementById('errorText');
+    
+    // Form submission handler
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Hide any previous messages
+        hideMessages();
+        
+        // Basic validation
+        if (!validateForm()) {
+            return;
+        }
+        
+        // Show loading state
+        setLoadingState(true);
+        
+        try {
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim() || 'Not provided',
+                company: document.getElementById('company').value.trim() || 'Not provided',
+                service: document.getElementById('service').value || 'Not specified',
+                budget: document.getElementById('budget').value || 'Not specified',
+                message: document.getElementById('message').value.trim(),
+                newsletter: document.getElementById('newsletter').checked,
+                timestamp: new Date().toISOString(),
+                status: 'new',
+                source: 'website-contact-form'
+            };
+            
+            // Save to Firebase
+            await db.collection('contactSubmissions').add(formData);
+            
+            // Show success message
+            showSuccess();
+            
+            // Reset form
+            resetForm();
+            
+        } catch (error) {
+            console.error('Error saving to Firebase:', error);
+            showError('Failed to send message. Please try again.');
+        } finally {
+            // Reset loading state
+            setLoadingState(false);
+        }
+    });
+    
+    // Basic form validation
+    function validateForm() {
+        let isValid = true;
+        
+        // Check required fields
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        
+        if (!name) {
+            showFieldError('name', 'Please enter your name');
+            isValid = false;
+        }
+        
+        if (!email) {
+            showFieldError('email', 'Please enter your email');
+            isValid = false;
+        } else if (!isValidEmail(email)) {
+            showFieldError('email', 'Please enter a valid email address');
+            isValid = false;
+        }
+        
+        if (!message) {
+            showFieldError('message', 'Please enter your message');
+            isValid = false;
+        }
+        
+        return isValid;
+    }
+    
+    // Email validation
+    function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+    
+    // Show field error
+    function showFieldError(fieldId, message) {
+        const field = document.getElementById(fieldId);
+        field.classList.add('is-invalid');
+        const feedback = field.nextElementSibling;
+        if (feedback && feedback.classList.contains('invalid-feedback')) {
+            feedback.textContent = message;
+        }
+    }
+    
+    // Clear field errors
+    function clearFieldErrors() {
+        const fields = contactForm.querySelectorAll('.form-control');
+        fields.forEach(field => {
+            field.classList.remove('is-invalid');
+        });
+    }
+    
+    // Set loading state
+    function setLoadingState(isLoading) {
+        submitBtn.disabled = isLoading;
+        if (isLoading) {
+            submitText.textContent = 'Sending...';
+            loadingSpinner.classList.remove('d-none');
+        } else {
+            submitText.textContent = 'Send Message';
+            loadingSpinner.classList.add('d-none');
+        }
+    }
+    
+    // Show success message
+    function showSuccess() {
+        successMessage.style.display = 'block';
+        successMessage.classList.add('show');
+        
+        // Scroll to success message
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+        // Auto-hide after 10 seconds
+        setTimeout(() => {
+            successMessage.classList.remove('show');
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 300);
+        }, 10000);
+    }
+    
+    // Show error message
+    function showError(message) {
+        errorText.textContent = message;
+        errorMessage.style.display = 'block';
+        errorMessage.classList.add('show');
+        
+        // Scroll to error message
+        errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    
+    // Hide all messages
+    function hideMessages() {
+        successMessage.style.display = 'none';
+        successMessage.classList.remove('show');
+        errorMessage.style.display = 'none';
+        errorMessage.classList.remove('show');
+        clearFieldErrors();
+    }
+    
+    // Reset form
+    function resetForm() {
+        contactForm.reset();
+        clearFieldErrors();
+    }
+    
+    // Real-time validation
+    document.querySelectorAll('#contactForm input, #contactForm textarea').forEach(field => {
+        field.addEventListener('input', function() {
+            this.classList.remove('is-invalid');
+        });
+    });
+    
+    // Email real-time validation
+    document.getElementById('email').addEventListener('blur', function() {
+        const email = this.value.trim();
+        if (email && !isValidEmail(email)) {
+            showFieldError('email', 'Please enter a valid email address');
+        }
+    });
+});
+</script>
+
+ <!--FIRE FORM ENDED-->
+
+
+
+            <!-- FAQ Section -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="service-detail-card">
+                        <h3 class="service-title mb-4 text-center">Frequently Asked Questions</h3>
+                        
+                        <div class="faq-item" id="faq1">
+                            <div class="faq-question" onclick="toggleFaq('faq1')">
+                                <h5>What is your typical response time for new inquiries?</h5>
+                                <i class="bi bi-plus faq-toggle"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>We respond to all new inquiries within 24 hours during business days (Monday-Friday). For inquiries received over the weekend, we respond by the end of the next business day. If you have an urgent matter, please call our office directly.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item" id="faq2">
+                            <div class="faq-question" onclick="toggleFaq('faq2')">
+                                <h5>Do you offer free consultations?</h5>
+                                <i class="bi bi-plus faq-toggle"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, we offer a complimentary 30-minute discovery call for all potential clients. During this call, we'll discuss your business goals, challenges, and how our services can help. This helps us understand if we're a good fit for each other before moving forward.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item" id="faq3">
+                            <div class="faq-question" onclick="toggleFaq('faq3')">
+                                <h5>What is your typical project timeline?</h5>
+                                <i class="bi bi-plus faq-toggle"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Project timelines vary based on scope and complexity. A typical brand development project takes 4-6 weeks, while ongoing services like social media management start showing results within the first month. We provide detailed timelines during our initial consultation based on your specific needs.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item" id="faq4">
+                            <div class="faq-question" onclick="toggleFaq('faq4')">
+                                <h5>Do you work with businesses outside your local area?</h5>
+                                <i class="bi bi-plus faq-toggle"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Absolutely! We work with clients across the globe. Thanks to modern collaboration tools, we've successfully served clients in North America, Europe, Asia, and Australia. Our team is experienced in managing remote collaborations effectively across different time zones.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item" id="faq5">
+                            <div class="faq-question" onclick="toggleFaq('faq5')">
+                                <h5>What industries do you specialize in?</h5>
+                                <i class="bi bi-plus faq-toggle"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>We have experience across various industries including technology, healthcare, retail, professional services, e-commerce, and B2B services. Our "Idea to Identity" framework is industry-agnostic, allowing us to adapt our strategies to any business sector.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <p>Have more questions? <a href="mailto:zonecreators1106@gmail.com" class="fw-bold" style="color: var(--metallic-gold);">Email us directly</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h3 class="footer-title">Zone Creators</h3>
+                    <p>We are not a digital marketing agency. We are business incubators.</p>
+                    <p>From idea validation to business growth, we provide complete marketing, branding & business growth solutions.</p>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="/">Home</a></li>
+                        <li class="mb-2"><a href="/Service/">Our Services</a></li>
+
+                       
+
+                        <li class="mb-2"><a href="/AboutUs/">About Us</a></li>
+                      
+
+                     <li class="mb-2"><a href="/Client/">Our Clients</a></li> 
+                      
+
+                     
+
+                        <li class="mb-2"><a href="/ContactUs/">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h3 class="footer-title">Contact Info</h3>
+                    <p><i class="bi bi-envelope me-2"></i> zonecreators1106@gmail.com</p>
+                    <p><i class="bi bi-telephone me-2"></i> +91 72008 31314</p>
+                    <p><i class="bi bi-geo-alt me-2"></i> 30 A, NACHIVALASU,KOOTHAMPATTI (P.T), ARACHALUR, ERODE - 638101</p>
+                    <div class="social-icons mt-3">
+                        <!--a href="#"><i class="bi bi-facebook"></i></a-->
+                        <a href="https://www.instagram.com/zonecreators_client_page?igsh=dzV6b3FibWRvazdl"><i class="bi bi-instagram"></i></a>
+                        <!--a href="#"><i class="bi bi-linkedin"></i></a-->
+                          <!--a href="#"><i class="bi bi-twitter"></i></a-->
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="text-center">
+            <p>&copy; 2026 Zone Creators. All rights reserved.</p>
+            <p>
+                Web Solution By 
+                <a href="https://www.devopschanakya.space/" target="_blank" class="text-light" style="text-decoration: none;">
+                    <i class="bi bi-code-slash me-1"></i>DevopsChanakya
+                </a>
+            </p>
+        </div>
+        </div>
+    </footer>
+    
+   
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+    <script>
+        // FAQ toggle functionality
+        function toggleFaq(id) {
+            const faqItem = document.getElementById(id);
+            faqItem.classList.toggle('active');
+        }
+        
+        // Enhanced contact form handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            const contactSuccess = document.getElementById('contactSuccess');
+            const userEmail = document.getElementById('userEmail');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const service = document.getElementById('service').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Simulate form submission
+                    const submitBtn = contactForm.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    const originalClass = submitBtn.className;
+                    
+                    // Show loading state
+                    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Sending...';
+                    submitBtn.disabled = true;
+                    
+                    // Simulate API call delay
+                    setTimeout(() => {
+                        // Show success message
+                        userEmail.textContent = email;
+                        contactSuccess.classList.add('show');
+                        
+                        // Reset form
+                        contactForm.reset();
+                        
+                        // Reset button
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                        submitBtn.className = originalClass;
+                        
+                        // Scroll to success message
+                        contactSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        
+                        // Hide success message after 10 seconds
+                        setTimeout(() => {
+                            contactSuccess.classList.remove('show');
+                        }, 10000);
+                        
+                        // Log form data (in real app, this would be sent to server)
+                        console.log('Form submitted:', { name, email, service, message });
+                        
+                    }, 1500);
+                });
+            }
+            
+            // Initialize all FAQ items to be closed
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                item.classList.remove('active');
+            });
+        });
+    </script>
+    <!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JS -->
+<script src="../js/main.js"></script>
+<script src="../js/chatbot.js"></script>
+<script src="../js/animations.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us | Zone Creators{% endblock %}
+
+{% block content %}
+    <!-- Hero Header -->
+    <section class="hero-section text-center py-5">
+        <div class="container">
+            <h1 class="hero-title">Get In Touch</h1>
+            <p class="hero-subtitle">Let's Discuss How We Can Scale Your Business</p>
+        </div>
+    </section>
+
+    <!-- Contact Form & Details -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Form -->
+                <div class="col-lg-7 mb-4">
+                    <div class="card border-0 shadow-sm p-4">
+                        <h3 class="mb-4" style="color: var(--deep-blue);">Send Us a Message</h3>
+                        <form method="POST" action="{% url 'contact' %}">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label font-weight-bold">Your Name *</label>
+                                    <input type="text" name="name" class="form-control" placeholder="John Doe" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label font-weight-bold">Email Address *</label>
+                                    <input type="email" name="email" class="form-control" placeholder="john@example.com" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label font-weight-bold">Phone Number</label>
+                                    <input type="text" name="phone" class="form-control" placeholder="+91 98765 43210">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label font-weight-bold">Subject</label>
+                                    <input type="text" name="subject" class="form-control" placeholder="Business Consultation">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label font-weight-bold">Message *</label>
+                                <textarea name="message" class="form-control" rows="5" placeholder="Tell us about your business goals..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg px-4">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Info Sidebar -->
+                <div class="col-lg-5 mb-4">
+                    <div class="card border-0 shadow-sm p-4 h-100 bg-light">
+                        <h3 class="mb-4" style="color: var(--deep-blue);">Contact Details</h3>
+                        <div class="mb-4">
+                            <h5><i class="bi bi-geo-alt text-warning me-2"></i> Address</h5>
+                            <p class="text-muted">30 A, NACHIVALASU, KOOTHAMPATTI (P.T), ARACHALUR, ERODE - 638101</p>
+                        </div>
+                        <div class="mb-4">
+                            <h5><i class="bi bi-telephone text-warning me-2"></i> Phone</h5>
+                            <p class="text-muted">+91 72008 31314</p>
+                        </div>
+                        <div class="mb-4">
+                            <h5><i class="bi bi-envelope text-warning me-2"></i> Email</h5>
+                            <p class="text-muted">zonecreators1106@gmail.com</p>
+                        </div>
+                        <div class="mt-auto">
+                            <h5>Follow Us</h5>
+                            <div class="social-icons">
+                                <a href="https://www.instagram.com/zonecreators_client_page" target="_blank" class="text-primary fs-4 me-3"><i class="bi bi-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

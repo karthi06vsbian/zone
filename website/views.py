@@ -4,9 +4,9 @@ from .models import Service, Client, LeadershipMember, ContactSubmission
 
 def home_view(request):
     try:
-        services = Service.objects.all()[:6]
-        clients = Client.objects.all()[:6]
-        team_members = LeadershipMember.objects.all()[:4]
+        services = list(Service.objects.all()[:6])
+        clients = list(Client.objects.all()[:6])
+        team_members = list(LeadershipMember.objects.all()[:4])
     except Exception:
         services = []
         clients = []
@@ -21,7 +21,7 @@ def home_view(request):
 
 def services_view(request):
     try:
-        services = Service.objects.all()
+        services = list(Service.objects.all())
     except Exception:
         services = []
     return render(request, 'services/index.html', {'services': services})
@@ -37,7 +37,7 @@ def service_detail_view(request, pk=None):
         service = None
 
     try:
-        all_services = Service.objects.all()
+        all_services = list(Service.objects.all())
     except Exception:
         all_services = []
 
@@ -50,7 +50,7 @@ def service_detail_view(request, pk=None):
 
 def about_view(request):
     try:
-        team_members = LeadershipMember.objects.all()
+        team_members = list(LeadershipMember.objects.all())
     except Exception:
         team_members = []
     return render(request, 'about.html', {'team_members': team_members})
@@ -58,10 +58,11 @@ def about_view(request):
 
 def clients_view(request):
     try:
-        clients = Client.objects.all()
+        clients = list(Client.objects.all())
     except Exception:
         clients = []
     return render(request, 'clients.html', {'clients': clients})
+
 
 
 
